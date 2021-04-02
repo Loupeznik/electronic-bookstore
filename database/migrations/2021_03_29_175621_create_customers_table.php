@@ -18,7 +18,7 @@ class CreateCustomersTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('surname');
-            $table->foreignId('user_id')->constrained(); // if user is registered, they pull their shipping info from this table
+            $table->foreignId('user_id')->nullable()->constrained(); // if user is registered, they pull their shipping info from this table
             $table->string('street');
             $table->integer('street_nr');
             $table->string('city');

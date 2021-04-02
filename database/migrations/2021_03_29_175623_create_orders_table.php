@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->double('sum'); // overall order cost
             $table->double('vat'); // VAT amount
-            $table->integer('status');
+            $table->integer('status'); // order completion status: 0 - accepted, 1 - in progress, 2 - completed, 3 - canceled, 4 - problem
             $table->foreignUuid('payment_method_id')->constrained('payment_methods'); // payment method
             $table->foreignUuid('cart_id')->constrained(); // cart is passing ordered items into the order
             $table->foreignId('assignee')->constrained('users')->nullable(); // should be null as default as it will be assigned to an admin later
