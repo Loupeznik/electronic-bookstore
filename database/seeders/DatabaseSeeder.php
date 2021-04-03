@@ -7,12 +7,22 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Use this seeder for real data.
      *
      * @return void
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            AuthorSeeder::class,
+            BookSeeder::class,
+            CartSeeder::class,
+            CategorySeeder::class,
+            ContactFormSeeder::class,
+            CustomerSeeder::class,
+            OrderSeeder::class,
+            OrderReturnSeeder::class,
+            ShippingMethodSeeder::class
+        ]);
     }
 }
