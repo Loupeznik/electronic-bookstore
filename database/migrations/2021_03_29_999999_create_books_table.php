@@ -24,7 +24,7 @@ class CreateBooksTable extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('publisher')->nullable();
             $table->integer('available'); // available quantity
-            $table->string('description');
+            $table->text('description');
             $table->integer('year')->nullable();
             $table->string('photo_path')->nullable(); // if null, a placeholder photo is used instead
             $table->timestamps();

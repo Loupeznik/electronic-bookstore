@@ -16,7 +16,7 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('type'); // PayPal, Card, Bank Transfer, ...
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->timestamps();
         });
     }
