@@ -55,4 +55,15 @@ class OrderFactory extends Factory
             ];
         });
     }
+
+    public function fresh()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'sum' => 0,
+                'vat' => 0,
+                'status' => 0
+            ];
+        });
+    }
 }
