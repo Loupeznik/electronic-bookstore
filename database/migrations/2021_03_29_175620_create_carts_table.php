@@ -17,6 +17,7 @@ class CreateCartsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('session_id'); // cart is bound to a session, once the session is destroyed, cart should destroy itself as well
             $table->softDeletes();
+            $table->foreign('session_id')->references('id')->on('sessions');
         });
     }
 

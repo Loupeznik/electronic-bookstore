@@ -19,7 +19,7 @@ class CreateBooksTable extends Migration
             $table->foreignId('author_id')->constrained();
             $table->double('price'); // price for one unit
             $table->double('sale_price')->nullable(); // price for one unit when on sale
-            $table->string('isbn');
+            $table->string('isbn')->unique();
             $table->char('language', 2); // language shortcut (CS, EN, DE)
             $table->foreignId('category_id')->constrained();
             $table->string('publisher')->nullable();
