@@ -103,7 +103,7 @@ class OrderTest extends TestCase
      */
     public function test_customer_orders($order)
     {
-        $customer = $order->customer->first();
+        $customer = $order->customer;
 
         $this->assertEquals('Test', $customer->name);
         $this->assertEquals('Customer', $customer->surname);

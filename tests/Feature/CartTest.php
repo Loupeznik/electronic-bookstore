@@ -43,8 +43,8 @@ class CartTest extends TestCase
             'session_id' => 'session_xxx'
         ]);
 
-        $cart = Cart::withCount('items')->where('session_id', 'session_xxx')->first()->count();
+        $cart = Cart::withCount('items')->where('session_id', 'session_xxx')->first();
 
-        $this->assertEquals(2, $cart);
+        $this->assertEquals(2, $cart->items_count);
     }
 }
