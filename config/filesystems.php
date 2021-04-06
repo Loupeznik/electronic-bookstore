@@ -69,4 +69,6 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
+    'cover_photo_placeholder_path' => 'covers/placeholder.png',
+
 ];
