@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48d599134bbb773fef728cf4c4b3bb30",
+    "content-hash": "363f87589613ed30540470d42644c8a9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -106,6 +106,57 @@
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "time": "2020-10-30T02:02:47+00:00"
+        },
+        {
+            "name": "biblys/isbn",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/biblys/isbn.git",
+                "reference": "eadcba4a50049f1c06e99c1cbec1bc46c590b2ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/biblys/isbn/zipball/eadcba4a50049f1c06e99c1cbec1bc46c590b2ff",
+                "reference": "eadcba4a50049f1c06e99c1cbec1bc46c590b2ff",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.2",
+                "phpunit/phpunit": "^6 || ^7 || ^8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Biblys": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Clement Bourgoin",
+                    "email": "c@iwzr.fr"
+                }
+            ],
+            "description": "A PHP library to convert and validate ISBNs",
+            "homepage": "https://github.com/biblys/isbn",
+            "keywords": [
+                "ISBN",
+                "book",
+                "ean",
+                "gtin"
+            ],
+            "support": {
+                "issues": "https://github.com/biblys/isbn/issues",
+                "source": "https://github.com/biblys/isbn/tree/2.4.0"
+            },
+            "time": "2021-03-05T00:00:00+00:00"
         },
         {
             "name": "brick/math",
