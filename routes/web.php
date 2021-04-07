@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(function() {
+    Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::resource('/authors', 'AuthorController');
+    Route::resource('/categories', 'CategoryController');
+    Route::resource('/books', 'BookController');
+    Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
+});
+
+Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get('/dashboard', 'UserProfileController')->name('user.dashboard');
+});

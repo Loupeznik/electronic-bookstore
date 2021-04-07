@@ -61,7 +61,31 @@ class User extends Authenticatable
 
     public function customer()
     {
-        $this->hasOne(Customer::class);
+        return $this->hasOne(Customer::class);
     }
 
+    public function parseRole()
+    {
+        switch($this->role)
+        {
+            case 0:
+                return 'USER';
+                break;
+            case 1:
+                return 'EDITOR';
+                break;
+            case 2:
+                return 'ADMIN';
+                break;
+        }
+    }
+
+    public function hasCustomer()
+    {
+        if ($this->hasOne(Customer::class)->count() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
