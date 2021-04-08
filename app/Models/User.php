@@ -82,10 +82,13 @@ class User extends Authenticatable
 
     public function hasCustomer()
     {
-        if ($this->hasOne(Customer::class)->count() > 0)
-        {
-            return true;
-        }
+        if ($this->hasOne(Customer::class)->count() > 0) return true;
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if ($this->role > 0) return true;
         return false;
     }
 }
