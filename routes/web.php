@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontEndController@booksFeature');
+Route::get('/books', 'FrontEndController@booksPage');
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(function() {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
