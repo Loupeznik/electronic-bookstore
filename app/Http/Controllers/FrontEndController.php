@@ -19,11 +19,11 @@ class FrontEndController extends Controller
         return view('welcome');
     }
 
-    public function author($id)
+    public function authorDetail($id)
     {
         $author = Author::with('books')->where('id', $id)->first();
 
-        return view('frontend.authors.detail', compact($author));
+        return view('authors.detail', compact('author'));
     }
 
     public function booksFeature()
@@ -46,7 +46,22 @@ class FrontEndController extends Controller
         
         $categories = Category::all();
 
-        return view('books', compact(['books', 'categories']));
+        return view('books.products', compact(['books', 'categories']));
     }
 
+    public function bookDetail($id)
+    {
+        $book = Book::with(['author', 'category'])->where('id', $id)->first();
+        $categories = Category::all();
+
+        return view('books.detail', compact(['book', 'categories']));
+    }
+
+    public function categoryPage($id)
+    {
+        $books = Book::with('category')->where('category_id', $id)->paginate(18);
+        $categories = Category::all();
+
+        return view('books.category', compact(['books', 'categories']));
+    }
 }
