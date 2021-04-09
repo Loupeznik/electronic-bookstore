@@ -23,4 +23,9 @@ class Author extends Model
         return $this->hasMany(Book::class);
     }
 
+    public function bookCount()
+    {
+        return $this->hasMany(Book::class)->count();
+    }
+
 }
