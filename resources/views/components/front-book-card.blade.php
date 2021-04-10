@@ -16,11 +16,7 @@
             <span class="block font-semibold text-xl">
                 {{$book->name}}
             </span>
-            <span
-                class="bg-white rounded-full text-blue-800 text-xs font-bold px-3 py-2 leading-none flex items-center">
-                <i class="ri-price-tag-3-line mr-2"></i> 
-                {{$book->sale_price ?? $book->price}} Kč
-            </span>
+            <livewire:add-to-cart :buttonType="'listing'" :price="$book->sale_price ?? $book->price" :bookId="$book->id" />
         </div>
         <span class="block opacity-75 text-sm -mb-1">
             by <x-hoverable-link link="{{'/authors/detail/' . $book->author->id}}">{{$book->author->name . ' ' . $book->author->surname}}</x-hoverable-link>

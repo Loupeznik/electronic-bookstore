@@ -30,10 +30,7 @@
                 <div class="flex px-1">
                     <p class="title-font font-medium text-2xl text-gray-900">{{ $book->sale_price ?? $book->price }}
                         Kč</p>
-                    <button
-                        class="flex ml-auto text-gray-800 bg-blue-300 border-2 border-transparent py-2 px-6 focus:outline-none transition-colors duration-300 hover:border-blue-800 hover:text-blue-800 rounded">
-                        <i class="ri-shopping-cart-line mr-2"></i> {{ __('Add to cart') }}
-                    </button>
+                    <livewire:add-to-cart :bookId="$book->id" />
                 </div>
             </div>
         </div>

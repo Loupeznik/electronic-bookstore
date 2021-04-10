@@ -21,6 +21,7 @@
                 <x-nav-item :link="'/login'">{{__('Login')}}</x-nav-item>
                 <x-nav-item :link="'/register'">{{__('Register')}}</x-nav-item>
             @endauth
+			<livewire:cart-status />
 		</div>
 		<button class="p-4 lg:hidden">
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 dark:text-coolGray-100">

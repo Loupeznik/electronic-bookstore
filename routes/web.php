@@ -13,11 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'FrontEndController@booksFeature');
-Route::get('/books', 'FrontEndController@booksPage');
-Route::get('/books/detail/{id}', 'FrontEndController@bookDetail');
-Route::get('/authors/detail/{id}', 'FrontEndController@authorDetail');
-Route::get('/category/{id}', 'FrontEndController@categoryPage');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', 'FrontEndController@booksFeature');
+    Route::get('/books', 'FrontEndController@booksPage');
+    Route::get('/books/detail/{id}', 'FrontEndController@bookDetail');
+    Route::get('/authors/detail/{id}', 'FrontEndController@authorDetail');
+    Route::get('/category/{id}', 'FrontEndController@categoryPage');
+    Route::get('/cart', 'CartController');
+});
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(function() {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
