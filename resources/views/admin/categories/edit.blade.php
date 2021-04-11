@@ -12,7 +12,7 @@
                     <x-section-header>
                         {{ __('Edit category') }}
                     </x-section-header>
-                    <form method="POST" action="/admin/categories/store">
+                    <form method="POST" action="/admin/categories/{{$category->id}}">
                         @csrf
                         @method('PUT')
                         <div class="flex flex-wrap mb-6">
