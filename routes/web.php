@@ -28,8 +28,10 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::resource('/categories', 'CategoryController');
     Route::resource('/books', 'BookController');
     Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
+    Route::resource('/shipping-methods', 'ShippingMethodController')->except('show');
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/dashboard', 'UserProfileController')->name('user.dashboard');
+    Route::resource('/methods', 'PaymentMethodController')->except('show');
 });
