@@ -7,6 +7,7 @@
                 <ul class="flex flex-col divide-y divide-gray-700">
                     <livewire:cart />
                 </ul>
+                <x-front-action-button :link="'/checkout'"><i class="ri-bank-card-line mr-2"></i> {{ __('Checkout') }}</x-front-action-button>
             </div>
         </div>
     </div>

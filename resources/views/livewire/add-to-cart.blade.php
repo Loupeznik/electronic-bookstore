@@ -1,5 +1,5 @@
 @if ($buttonType == 'listing')
-    <button class="bg-white rounded-full text-blue-800 text-xs font-bold px-3 py-2 leading-none flex items-center" wire:click.prevent="addItem({{$bookId}})">
+    <button class="bg-white rounded-full text-blue-800 text-xs font-bold px-3 py-2 leading-none flex items-center" title="Add to cart" wire:click.prevent="addItem({{$bookId}})">
         <i class="ri-price-tag-3-line mr-2"></i>
         {{ $price }} Kč
     </button>
