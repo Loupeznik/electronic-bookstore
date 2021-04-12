@@ -20,6 +20,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/authors/detail/{id}', 'FrontEndController@authorDetail');
     Route::get('/category/{id}', 'FrontEndController@categoryPage');
     Route::get('/cart', 'CartController');
+    Route::get('/checkout', 'OrderController@create');
+    Route::post('/checkout', 'OrderController@store');
+    // Route::redirect('/checkout/payment', '/checkout/success', 301); // This route would redirect to an external payment gate
+    Route::get('/checkout/success', 'OrderController@success');
+    Route::post('/checkout/register', 'CustomerController@store')->name('customers.store');
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(function() {

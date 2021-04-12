@@ -6,9 +6,8 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" @if (session('customer') != NULL) action="{{ route('customers.store') }}" @else action="{{ route('register') }}" @endif>
             @csrf
-
             <div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
