@@ -28,4 +28,13 @@ class Cart extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function overallSum()
+    {
+        $sum = 0;
+        foreach ($this->items as $item)
+        {
+            $sum += $item->book->price * $item->count;
+        }
+        return $sum;
+    }
 }
