@@ -20,11 +20,11 @@
 
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 
     <x-navbar />
 
-    <div>
+    <div class="flex-grow">
         @yield('content')
     </div>
 

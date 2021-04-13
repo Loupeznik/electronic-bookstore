@@ -1,6 +1,6 @@
 @if ($buttonType == 'listing')
-    <button class="bg-white rounded-full text-blue-800 text-xs font-bold px-3 py-2 leading-none flex items-center" title="Add to cart" wire:click.prevent="addItem({{$bookId}})">
-        <i class="ri-price-tag-3-line mr-2"></i>
+    <button class="bg-white rounded-full border-2 border-transparent text-blue-800 hover:border-blue-800 transform-all duration-300 text-xs font-bold px-3 py-2 leading-none flex items-center" title="Add to cart" wire:click.prevent="addItem({{$bookId}})">
+        <i class="ri-shopping-cart-line mr-2"></i>
         {{ $price }} Kč
     </button>
 @elseif ($buttonType == 'remove')
