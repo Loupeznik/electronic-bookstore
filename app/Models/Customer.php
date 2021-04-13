@@ -41,4 +41,10 @@ class Customer extends Model
     {
         return $this->hasMany(Order::class)->count();
     }
+
+    public function hasUser()
+    {
+        if ($this->user != NULL) return true;
+        return false;
+    }
 }

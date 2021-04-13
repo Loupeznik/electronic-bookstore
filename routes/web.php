@@ -34,6 +34,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::resource('/books', 'BookController');
     Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
     Route::resource('/shipping-methods', 'ShippingMethodController')->except('show');
+    Route::resource('/customers', 'CustomerController')->except(['create', 'store']);
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
