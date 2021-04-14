@@ -22,7 +22,7 @@
                                         <option>PayPal</option>
                                         <option>VISA</option>
                                         <option>Mastercard</option>
-                                        <option>{{ __('Wire transfer') }}</option>
+                                        <option value="bank">{{ __('Wire transfer') }}</option>
                                     </x-input-select>
                                 </div>
                             </div>

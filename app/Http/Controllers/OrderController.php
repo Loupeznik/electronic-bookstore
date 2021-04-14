@@ -61,7 +61,7 @@ class OrderController extends Controller
         $order = Order::create([
             'cart_id' => $cart->id,
             'sum' => $cart->overallSum(),
-            'vat' => $cart->overallSum() * .21,
+            'vat' => number_format($cart->overallSum() * .21, 2),
             'status' => 0,
             'payment_method_id' => PaymentMethod::firstOrCreate([
                 'customer_id' => $customer->id,
@@ -178,7 +178,7 @@ class OrderController extends Controller
     {
         return $input->validate([
             'shipping_method' => ['required', 'numeric'],
-            'payment_method' => ['required', Rule::in(['PayPal', 'VISA', 'MasterCard', 'bank'])]
+            'payment_method' => ['required', Rule::in(['PayPal', 'VISA', 'Mastercard', 'bank'])]
         ]);
     }
 }
