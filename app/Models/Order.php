@@ -25,7 +25,7 @@ class Order extends Model
 
     public function paymentMethod()
     {
-        return $this->hasOne(PaymentMethod::class);
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     public function cart()
@@ -45,7 +45,7 @@ class Order extends Model
 
     public function shippingMethod()
     {
-        return $this->hasOne(shippingMethod::class);
+        return $this->belongsTo(ShippingMethod::class, 'shipping_id', 'id');
     }
 
     public function customer()
@@ -56,5 +56,10 @@ class Order extends Model
     public function orderReturn()
     {
         return $this->hasOne(OrderReturn::class);
+    }
+
+    public function orderTotal($currency = null)
+    {
+        return $this->sum + $this->vat . ' ' . $currency;
     }
 }

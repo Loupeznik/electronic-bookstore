@@ -16,9 +16,8 @@ class ShippingMethod extends Model
         'cost'
     ];
 
-    public function order()
+    public function orders()
     {
-        $this->belongsTo(Order::class);
+        return $this->hasMany(Order::class, 'shipping_id', 'id');
     }
-
 }

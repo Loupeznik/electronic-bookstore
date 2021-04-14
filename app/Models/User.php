@@ -86,6 +86,15 @@ class User extends Authenticatable
         return false;
     }
 
+    public function customerOrders()
+    {
+        if ($this->hasCustomer())
+        {
+            return $this->customer->orders;
+        }
+        return null;
+    }
+
     public function isAdmin()
     {
         if ($this->role > 0) return true;
