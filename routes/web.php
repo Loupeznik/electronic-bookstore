@@ -38,6 +38,10 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
-    Route::get('/dashboard', 'UserProfileController')->name('user.dashboard');
+    Route::get('/dashboard', 'UserProfileController@index')->name('user.dashboard');
+    Route::get('/orders', 'UserProfileController@orders')->name('user.orders');
+    Route::get('/orders/{order}', 'UserProfileController@order');
+    Route::get('/orders/{order}/refund', 'UserProfileController@refund');
+    Route::post('/orders/{order}/refund', 'UserProfileController@storeRefund');
     Route::resource('/methods', 'PaymentMethodController')->except('show');
 });

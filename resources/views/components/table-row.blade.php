@@ -17,6 +17,8 @@
                 <a href="@empty($path) {{'/' . request()->path() . '/' . $id . '/edit'}} @else {{'/' . $path . '/' . $id . '/edit'}} @endempty"><i class="ri-edit-2-line text-blue-500"></i></a>
             @elseif ($action == 'show')
                 <a href="@empty($path) {{'/' . request()->path() . '/' . $id}} @else {{'/' . $path . '/' . $id}} @endempty"><i class="ri-file-list-line text-blue-500"></i></a>
+            @elseif ($action == 'refund')
+                <a href="/user/orders/{{ $id }}/refund"><i class="ri-refund-2-line text-yellow-500"></i></a>
             @endif
         @endforeach
         </td>
