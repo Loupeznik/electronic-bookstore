@@ -158,7 +158,8 @@ class OrderController extends Controller
                 'city' => ['required', 'string', 'max: 100'],
                 'zip' => ['required', 'numeric', 'digits:5'],
                 'country' => ['required', 'string', Rule::in(['cz', 'sk'])],
-                'phone' => ['required', 'regex:/^\d{9}$/']
+                'phone' => ['required', 'regex:/^\d{9}$/'],
+                'email' => ['required', 'email']
             ]);
         }
         return $input->validate([
@@ -169,8 +170,7 @@ class OrderController extends Controller
             'city' => ['required', 'string', 'max: 100'],
             'zip' => ['required', 'numeric', 'digits:5'],
             'country' => ['required', 'string', Rule::in(['cz', 'sk'])],
-            'phone' => ['required', 'regex:/^\d{9}$/'],
-            'email' => ['required', 'email']
+            'phone' => ['required', 'regex:/^\d{9}$/']
         ]);
     }
 
