@@ -43,7 +43,7 @@ class OrderReturnController extends Controller
         $refund = OrderReturn::create($this->validateInput($request));
         $this->updateOrder($refund->order, $request->status);
 
-        return redirect('/admin/refunds')->with('status', 'success')->with('message', 'Order return successfully created');
+        return redirect('/admin/refunds')->with('status', 'success')->with('message', 'Order return has been created');
     }
 
     /**
@@ -79,11 +79,10 @@ class OrderReturnController extends Controller
      */
     public function update(Request $request, OrderReturn $refund)
     {
-        dd($this->validateInput($request));
         $refund->update($this->validateInput($request));
         $this->updateOrder($refund->order, $request->status);
 
-        return redirect('/admin/refunds')->with('status', 'success')->with('message', 'xxx');
+        return redirect('/admin/refunds')->with('status', 'success')->with('message', 'Order return has been updated');
     }
 
     /**
@@ -94,7 +93,9 @@ class OrderReturnController extends Controller
      */
     public function destroy(OrderReturn $refund)
     {
-        //
+        $refund->delete();
+
+        return redirect('/admin/refunds')->with('status', 'success')->with('message', 'Order return has been deleted');
     }
 
     public function validateInput($input)
