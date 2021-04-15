@@ -19,7 +19,7 @@ class CreateOrderReturnsTable extends Migration
             $table->integer('status')->default(0); // return status: 0 - received, 1 - under review, 2 - finished
             $table->integer('result')->nullable(); // return result: 0 - order refunded, 1 - exchanged goods, 2 - return not accepted, ...
             $table->text('description'); // description
-            $table->foreignId('assignee')->nullable()->constrained('users'); // can be assigned to an admin afterwards
+            $table->foreignId('assignee_id')->nullable()->constrained('users'); // can be assigned to an admin afterwards
             $table->datetime('completed_at')->nullable(); // date of return completion (set when status is set to 2)
             $table->timestamps();
         });

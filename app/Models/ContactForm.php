@@ -13,12 +13,12 @@ class ContactForm extends Model
         'name',
         'email',
         'content',
-        'assignee',
+        'assignee_id',
         'status'
     ];
 
     public function assignee()
     {
-        return $this->belongsTo(User::class, 'id', 'assignee');
+        return $this->belongsTo(User::class, 'assignee_id', 'id');
     }
 }

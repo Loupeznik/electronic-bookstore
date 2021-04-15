@@ -14,7 +14,7 @@ class OrderReturn extends Model
         'status',
         'result',
         'description',
-        'assignee',
+        'assignee_id',
         'completed_at'
     ];
 
@@ -25,6 +25,6 @@ class OrderReturn extends Model
 
     public function assignee()
     {
-        return $this->belongsTo(User::class, 'id', 'assignee');
+        return $this->belongsTo(User::class, 'assignee_id', 'id');
     }
 }

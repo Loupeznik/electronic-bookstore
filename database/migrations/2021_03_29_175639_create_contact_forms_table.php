@@ -18,7 +18,7 @@ class CreateContactFormsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('content');
-            $table->foreignId('assignee')->nullable()->constrained('users'); // can be assigned to an admin later on
+            $table->foreignId('assignee_id')->nullable()->constrained('users'); // can be assigned to an admin later on
             $table->integer('status')->default(0); // 0 - pending, 1 - completed
             $table->timestamps();
         });

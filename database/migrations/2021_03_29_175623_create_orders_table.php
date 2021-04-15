@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('status'); // order completion status: 0 - accepted, 1 - in progress, 2 - completed, 3 - canceled, 4 - problem
             $table->foreignUuid('payment_method_id')->constrained('payment_methods'); // payment method
             $table->foreignUuid('cart_id')->constrained(); // cart is passing ordered items into the order
-            $table->foreignId('assignee')->nullable()->constrained('users'); // should be null as default as it will be assigned to an admin later
+            $table->foreignId('assignee_id')->nullable()->constrained('users'); // should be null as default as it will be assigned to an admin later
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('shipping_id')->constrained('shipping_methods'); // shipping method
             $table->softDeletes();

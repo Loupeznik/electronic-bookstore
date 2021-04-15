@@ -18,7 +18,7 @@ class Order extends Model
         'status',
         'payment_method_id',
         'cart_id',
-        'assignee',
+        'assignee_id',
         'customer_id',
         'shipping_id'
     ];
@@ -40,7 +40,7 @@ class Order extends Model
 
     public function assignee()
     {
-        return $this->belongsTo(User::class, 'id', 'assignee');
+        return $this->belongsTo(User::class, 'assignee_id', 'id');
     }
 
     public function shippingMethod()
@@ -56,6 +56,12 @@ class Order extends Model
     public function orderReturn()
     {
         return $this->hasOne(OrderReturn::class);
+    }
+
+    public function hasReturn()
+    {
+        if ($this->orderReturn != null) return true;
+        return false;
     }
 
     public function orderTotal($currency = null)

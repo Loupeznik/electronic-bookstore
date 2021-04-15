@@ -100,4 +100,9 @@ class User extends Authenticatable
         if ($this->role > 0) return true;
         return false;
     }
+
+    public function refunds()
+    {
+        return $this->hasMany(OrdeReturn::class, 'id', 'assignee');
+    }
 }
