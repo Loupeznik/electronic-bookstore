@@ -14,10 +14,17 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-table :columns="['ID', 'Items', 'Order date', 'Status', 'Total', 'Action']">
                     @forelse($orders as $order)
+                    @if ($order->hasReturn())
+                        <x-table-row
+                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status, $order->orderTotal('Kč')]"
+                            :actions="['show']" :id="$order->id"
+                             />
+                    @else
                         <x-table-row
                             :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status, $order->orderTotal('Kč')]"
                             :actions="['show', 'refund']" :id="$order->id"
                              />
+                    @endif
                     @empty
                         <x-table-row :row["'-', '-', '-', '-', '-', '-'"] />
                     @endforelse
@@ -26,6 +33,6 @@
         </div>
     </div>
     @else
-        <x-alert>No customer account is tied to this user</x-alert>
+        <x-alert>{{ __('No customer account is tied to this user') }}</x-alert>
     @endif
 </x-app-layout>

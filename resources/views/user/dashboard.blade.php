@@ -16,7 +16,7 @@
                         <h1 class="font-semibold text-xl">User details</h1>
                         <div class="border-t mt-2">
                             <dl>
-                                <x-book-detail-field :name="'Email'" :value="$user->name" />
+                                <x-book-detail-field :name="'Username'" :value="$user->name" />
                                 <x-book-detail-field :name="'Email'" :value="$user->email" />
                                 <x-book-detail-field :name="'Registered'"
                                     :value="date('d.m.Y h:i', strtotime($user->created_at))" />

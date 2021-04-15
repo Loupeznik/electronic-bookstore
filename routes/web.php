@@ -35,13 +35,14 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
     Route::resource('/shipping-methods', 'ShippingMethodController')->except('show');
     Route::resource('/customers', 'CustomerController')->except(['create', 'store']);
+    Route::resource('/refunds', 'OrderReturnController');
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/dashboard', 'UserProfileController@index')->name('user.dashboard');
     Route::get('/orders', 'UserProfileController@orders')->name('user.orders');
-    Route::get('/orders/{order}', 'UserProfileController@order');
-    Route::get('/orders/{order}/refund', 'UserProfileController@refund');
-    Route::post('/orders/{order}/refund', 'UserProfileController@storeRefund');
+    Route::get('/orders/{order}', 'UserProfileController@order')->name('user.order');
+    Route::get('/orders/{order}/refund', 'UserProfileController@refund')->name('refund.create');
+    Route::post('/orders/{order}/refund', 'UserProfileController@refundStore')->name('refund.store');
     Route::resource('/methods', 'PaymentMethodController')->except('show');
 });
