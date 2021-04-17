@@ -5,6 +5,12 @@
         </h2>
     </x-slot>
 
+    @if (session('status'))
+    <x-alert>
+        {{ session('status') }}
+    </x-alert>
+    @endif
+
     @if (Auth::user()->hasCustomer())
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -26,7 +32,7 @@
                              />
                     @endif
                     @empty
-                        <x-table-row :row["'-', '-', '-', '-', '-', '-'"] />
+                        <x-table-row :row="['-', '-', '-', '-', '-', '-']" />
                     @endforelse
                 </x-table>
             </div>

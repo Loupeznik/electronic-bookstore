@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderReturn;
@@ -32,9 +31,12 @@ class UserProfileController extends Controller
      */
     public function orders()
     {
-        $orders = Order::where('customer_id', Auth::user()->customer->id)->get();
-
-        return view('user.orders.index', compact('orders'));
+        if (Auth::user()->hasCustomer())
+        {
+            $orders = Order::where('customer_id', Auth::user()->customer->id)->get();
+            return view('user.orders.index', compact('orders'));
+        }
+        else return view('user.orders.index');
     }
 
     /**
@@ -45,19 +47,27 @@ class UserProfileController extends Controller
      */
     public function order(Order $order)
     {
+        if ($order->customer_id != Auth::user()->customer->id)
+        {
+            return redirect('/user/orders')->with('status', 'error')->with('message', 'You may create a refund request only for you own orders');
+        }
         $order = $order->with('items')->first();
 
         return view('user.orders.detail', compact('order'));
     }
 
     /**
-     * Show user's orders.
+     * Show refund request form.
      *
      * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function refund(Order $order)
     {
+        if ($order->customer_id != Auth::user()->customer->id)
+        {
+            return redirect('/user/orders')->with('status', 'error')->with('message', 'You may create a refund request only for you own orders');
+        }
         $order = $order->with('items')->first();
 
         return view('user.orders.refund', compact('order'));
@@ -72,11 +82,11 @@ class UserProfileController extends Controller
      */
     public function refundStore(Request $request, Order $order)
     {
-        if ($order->customer->id != Auth::user()->customer->id)
+        if ($order->customer_id != Auth::user()->customer->id)
         {
             return redirect('/user/orders')->with('status', 'error')->with('message', 'You may create a refund request only for you own orders');
         }
-        else if ($order->hasRefund())
+        else if ($order->hasReturn())
         {
             return redirect('/user/orders')->with('status', 'error')->with('message', 'This order already has a refund request');
         }
