@@ -36,6 +36,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::resource('/shipping-methods', 'ShippingMethodController')->except('show');
     Route::resource('/customers', 'CustomerController')->except(['create', 'store']);
     Route::resource('/refunds', 'OrderReturnController');
+    Route::get('/orders', 'OrderController@list')->name('orders.index');
+    Route::resource('/orders', 'OrderController')->except(['index', 'create', 'store']);
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {

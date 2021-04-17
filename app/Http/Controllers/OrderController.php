@@ -11,6 +11,7 @@ use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -27,7 +28,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new order.
+     * Show a form for creating a new order.
      *
      * @return \Illuminate\Http\Response
      */
@@ -123,14 +124,56 @@ class OrderController extends Controller
     }
 
     /**
-     * Display an order.
+     * Display paginated list of all pending orders. This action can only be done by an admin.
+     * Displays all orders where status is not Finished or Cancelled
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $orders = Order::with(['items', 'customer', 'paymentMethod', 'shippingMethod'])->whereNotIn('status', [2,3])->latest()->paginate(20);
+
+        return view('admin.orders.index', compact('orders'));
+    }
+
+    /**
+     * Display an order. This action can only be done by an admin.
      *
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
     {
-        // TODO
+        return view('user.orders.detail', compact('order'));
+    }
+
+    /**
+     * Show a form for editing an existing order. This action can only be done by an admin.
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Order $order)
+    {
+        $admins = User::where('role', 2)->get();
+
+        return view('admin.orders.edit', compact(['admins', 'order']));
+    }
+
+    /**
+     * Update an existing order. This action can only be done by an admin.
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Order $order)
+    {
+        $order->update($request->validate([
+            'assignee_id' => ['required', 'numeric', 'exists:\App\Models\User,id'],
+            'status' => ['required', 'numeric', 'max:4']
+        ]));
+
+        return redirect('/admin/orders')->with('status', 'success')->with('message', 'Order updated');
     }
 
     /**

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Refund requests') }}
+            {{ __('Orders') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <x-section-header>
-                {{ __('Table of refund requests') }}
+                {{ __('Table of orders') }}
             </x-section-header>
 
             @if (session('status'))
@@ -19,17 +19,17 @@
             @endif
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-table :columns="['ID', 'Order ID', 'Status', 'Assigned to', 'Created at', 'Actions']">
-                    @forelse ($returns as $refund)
+                <x-table :columns="['ID', 'Status', 'Assigned To', 'Total', 'Customer', 'Items', 'Created at', 'Actions']">
+                    @forelse ($orders as $order)
                         <x-table-row
-                            :row="[$refund->id, $refund->order->id, $refund->status, $refund->assignee->name ?? '-', date('d.m.Y h:i', strtotime($refund->created_at))]"
-                            :actions="['edit', 'show']" :id="$refund->id" />
+                            :row="[$order->id, $order->status, $order->assignee->name ?? '-', $order->orderTotal('Kč'), $order->customer->fullName(), $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at))]"
+                            :actions="['show', 'edit', 'delete']" :id="$order->id" />
                     @empty
-                        <x-table-row :row="['-','-','-','-','-','-']" />
+                        <x-table-row :row="['-','-','-','-','-','-', '-', '-']" />
                     @endforelse
                 </x-table>
             </div>
-            {{ $returns->links() }}
+            {{ $orders->links() }}
         </div>
     </div>
 </x-app-layout>

@@ -9,19 +9,31 @@ use App\Models\User;
 class OrderReturnController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display paginated list of pending order returns.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $returns = OrderReturn::with('order', 'assignee')->get();
+        $returns = OrderReturn::with(['order', 'assignee'])->whereNull('result')->latest()->paginate(20);
 
         return view('admin.returns.index', compact('returns'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display paginated list of finished order returns.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function finished()
+    {
+        $returns = OrderReturn::with(['order', 'assignee'])->whereNotNull('result')->latest()->paginate(20);
+
+        return view('admin.returns.index', compact('returns'));
+    }
+
+    /**
+     * Show order return create page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +45,7 @@ class OrderReturnController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store new order return.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -47,7 +59,7 @@ class OrderReturnController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display specific order return.
      *
      * @param  \App\Models\OrderReturn $refund
      * @return \Illuminate\Http\Response
@@ -58,7 +70,7 @@ class OrderReturnController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show order return edit page.
      *
      * @param  \App\Models\OrderReturn $refund
      * @return \Illuminate\Http\Response
@@ -71,7 +83,7 @@ class OrderReturnController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update specific order return.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\OrderReturn $refund
@@ -86,7 +98,7 @@ class OrderReturnController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified order return.
      *
      * @param  \App\Models\OrderReturn $refund
      * @return \Illuminate\Http\Response
@@ -110,10 +122,13 @@ class OrderReturnController extends Controller
         ]);
     }
 
-    // Update original order's status to reflect the status of it's return/refund
-    // $order - order to be updated
-    // $status - status of the refund
-    // return void
+    /** 
+     * Update original order's status to reflect the status of it's return/refund.
+     * 
+     * @param App\Models\Order $order
+     * @param $status (status of the refund)
+     * @return void
+    */
     public function updateOrder($order, $status)
     {
         if ($status < 2)

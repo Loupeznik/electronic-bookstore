@@ -47,4 +47,9 @@ class Customer extends Model
         if ($this->user != NULL) return true;
         return false;
     }
+
+    public function fullName()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 }
