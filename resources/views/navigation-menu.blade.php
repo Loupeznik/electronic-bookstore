@@ -5,16 +5,94 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('admin.dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                    <a href="/">
+                        <img class="block h-9 w-auto" src="/logo.png" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                    <x-jet-nav-link href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}" :active="request()->routeIs('*.dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @if(Auth::user()->isAdmin() && request()->is('admin/*'))
+                        <x-jet-nav-link href="{{ route('orders.index') }}" :active="request()->routeIs('orders.*')">{{ __('Orders') }}</x-jet-nav-link>
+                        <x-nav-dropdown-parent :active="request()->routeIs('refunds.*')">
+                            <x-slot name="name">
+                                {{ __('Returns') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('refunds.index') }}">{{ __('Pending requests') }}</a>
+                                <a href="{{ route('refunds.create') }}">{{ __('Create a refund request') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-nav-dropdown-parent :active="request()->routeIs('customers.*')">
+                            <x-slot name="name">
+                                {{ __('Customers') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('customers.index') }}">{{ __('Customers') }}</a>
+                                <a href="#">{{ __('Contact forms') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-nav-dropdown-parent :active="request()->routeIs('books.*')">
+                            <x-slot name="name">
+                                {{ __('Books') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('books.index') }}">{{ __('List of books') }}</a>
+                                <a href="{{ route('books.create') }}">{{ __('Add a book') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-nav-dropdown-parent :active="request()->routeIs('authors.*')">
+                            <x-slot name="name">
+                                {{ __('Authors') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('authors.index') }}">{{ __('List of authors') }}</a>
+                                <a href="{{ route('authors.create') }}">{{ __('Add an author') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-nav-dropdown-parent :active="request()->routeIs('categories.*')">
+                            <x-slot name="name">
+                                {{ __('Categories') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('categories.index') }}">{{ __('List of categories') }}</a>
+                                <a href="{{ route('categories.create') }}">{{ __('Add a category') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-nav-dropdown-parent :active="request()->routeIs('users.*')">
+                            <x-slot name="name">
+                                {{ __('Users') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('users.index') }}">{{ __('List of users') }}</a>
+                                <a href="{{ route('users.create') }}">{{ __('Add user') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-nav-dropdown-parent :active="request()->routeIs('shipping-methods.*')">
+                            <x-slot name="name">
+                                {{ __('Shipping methods') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('shipping-methods.index') }}">{{ __('List of shipping methods') }}</a>
+                                <a href="{{ route('shipping-methods.create') }}">{{ __('Add a shipping method') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                    @endif
+                    @if (Auth::user()->role == 0 || request()->is('user/*'))
+                        <x-nav-dropdown-parent :active="request()->routeIs('methods.*')">
+                            <x-slot name="name">
+                                {{ __('Payment methods') }}
+                            </x-slot>
+                            <x-slot name="children">
+                                <a href="{{ route('methods.index') }}">{{ __('Your payment methods') }}</a>
+                                <a href="{{ route('methods.create') }}">{{ __('Add a payment method') }}</a>
+                            </x-slot>
+                        </x-nav-dropdown-parent>
+                        <x-jet-nav-link href="{{ route('user.orders') }}" :active="request()->routeIs('user.order*')">{{ __('Orders') }}</x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -24,21 +102,14 @@
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
                                 </button>
-                            @else
-                                <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                        {{ Auth::user()->name }}
-
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </span>
-                            @endif
+                            </span>
                         </x-slot>
 
                         <x-slot name="content">
@@ -51,9 +122,12 @@
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
+                            @if (Auth::user()->isAdmin())
+                                <x-jet-dropdown-link href="{{ route('user.dashboard') }}">
+                                    {{ __('Act as user') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('admin.dashboard') }}">
+                                    {{ __('Act as admin') }}
                                 </x-jet-dropdown-link>
                             @endif
 
@@ -89,7 +163,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+            <x-jet-responsive-nav-link href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}" :active="request()->routeIs('*.dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
@@ -114,12 +188,6 @@
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
-
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
-                    </x-jet-responsive-nav-link>
-                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
