@@ -22,7 +22,7 @@ class OrderTest extends TestCase
      *
      * @return void
      */
-    public function test_order_creation()
+    public function test_order_creation_and_operations()
     {
         $session = 'session_xxx';
         $checksum = 0;
@@ -32,7 +32,14 @@ class OrderTest extends TestCase
             'name' => 'Test',
             'surname' => 'Customer'
         ]);
-        $cart = Cart::with('items')->where('session_id', $session)->first();
+        
+        $cart = Cart::with('items')->where('session_id', $session)->firstOrCreate([
+            'session_id' => $session
+        ]);
+
+        CartItem::factory()->count(10)->create([
+            'cart_id' => $cart->id
+        ]);
         
         $order = Order::factory()->fresh()->create([
             'cart_id' => $cart->id,
@@ -74,17 +81,6 @@ class OrderTest extends TestCase
             'cart_id' => $cart->id
         ]);
 
-        return $order;
-    }
-
-    /**
-     * Test updating the order status.
-     *
-     * @depends test_order_creation
-     * @return void
-     */
-    public function test_order_status_change($order)
-    {
         $order->update([
             'status' => 3
         ]);
@@ -93,41 +89,17 @@ class OrderTest extends TestCase
             'id' => $order->id,
             'status' => 3
         ]);
-    }
 
-    /**
-     * Test relationship between order and customer.
-     *
-     * @depends test_order_creation
-     * @return void
-     */
-    public function test_customer_orders($order)
-    {
-        $customer = $order->customer;
-
-        $this->assertEquals('Test', $customer->name);
-        $this->assertEquals('Customer', $customer->surname);
-    }
-
-    /**
-     * Test order return and it's relationships.
-     *
-     * @depends test_order_creation
-     * @return void
-     */
-    public function test_order_return($order)
-    {
         $return = OrderReturn::factory()->assigned()->create([
-            'order_id' => $order->id
+            'order_id' => $order->id,
         ]);
 
         $this->assertNotNull($return->assignee);
-        $this->assertDatabaseHas('users', [
-            'id' => $return->assignee,
-            'role' => 2
-        ]);
         $this->assertEquals($return->id, $order->orderReturn->id);
+
+        return $order;
     }
+
 
     /**
      * Test soft deletes on orders.

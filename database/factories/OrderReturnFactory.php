@@ -44,7 +44,7 @@ class OrderReturnFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'assignee' => User::factory()->admin()
+                'assignee_id' => User::factory()->admin()
             ];
         });
     }

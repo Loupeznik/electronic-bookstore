@@ -51,6 +51,20 @@ class BookModelTest extends TestCase
     public function test_book_creation()
     {
 
+        $author = [
+            'name' => 'Ernest',
+            'surname' => 'Hemmingway',
+            'nationality' => 'American'
+        ];
+
+        $category = [
+            'name' => $this->testCategoryName
+        ];
+
+        Author::create($author);
+
+        Category::create($category);
+
         $book = [
             'name' => 'For whom the bell tolls',
             'author_id' => Author::where('surname', $this->testAuthorSurname)->first()->id,
@@ -67,57 +81,17 @@ class BookModelTest extends TestCase
 
         $this->assertDatabaseHas('books', $book);
 
-    }
-
-    /**
-     * Test book to author relationship.
-     *
-     * @return void
-     */
-    public function test_book_to_author_relationship()
-    {
-
         $response = Book::where('isbn', $this->testBookISBN)->first()->author->surname;
 
         $this->assertEquals($this->testAuthorSurname, $response);
-
-    }
-
-    /**
-     * Test author to book relationship.
-     *
-     * @return void
-     */
-    public function test_author_to_book_relationship()
-    {
 
         $response = Author::where('surname', $this->testAuthorSurname)->first()->books->where('isbn', $this->testBookISBN)->first()->isbn;
 
         $this->assertEquals($this->testBookISBN, $response);
 
-    }
-
-    /**
-     * Test book to category relationship.
-     *
-     * @return void
-     */
-    public function test_book_to_category_relationship()
-    {
-
         $response = Book::where('isbn', $this->testBookISBN)->first()->category->name;
 
         $this->assertEquals($this->testCategoryName, $response);
-
-    }
-
-    /**
-     * Test category to book relationship by counting the books in desired category.
-     *
-     * @return void
-     */
-    public function test_category_to_book_relationship_with_count()
-    {
 
         $response = Category::withCount('books')->where('name', $this->testCategoryName)->first()->count();
 
