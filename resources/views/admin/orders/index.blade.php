@@ -22,7 +22,7 @@
                 <x-table :columns="['ID', 'Status', 'Assigned To', 'Total', 'Customer', 'Items', 'Created at', 'Actions']">
                     @forelse ($orders as $order)
                         <x-table-row
-                            :row="[$order->id, $order->status, $order->assignee->name ?? '-', $order->orderTotal('Kč'), $order->customer->fullName(), $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at))]"
+                            :row="[$order->id, $order->status(), $order->assignee->name ?? '-', $order->orderTotal('Kč'), $order->customer->fullName(), $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at))]"
                             :actions="['show', 'edit', 'delete']" :id="$order->id" />
                     @empty
                         <x-table-row :row="['-','-','-','-','-','-', '-', '-']" />

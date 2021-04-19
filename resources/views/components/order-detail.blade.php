@@ -15,8 +15,9 @@
                             <x-book-detail-field :name="'Sum'" :value="$order->sum . ' Kč'" />
                             <x-book-detail-field :name="'VAT'" :value="$order->vat . ' Kč'" />
                             <x-book-detail-field :name="'Total'" :value="$order->orderTotal('Kč')" />
-                            <x-book-detail-field :name="'Status'" :value="$order->status" />
+                            <x-book-detail-field :name="'Status'" :value="$order->status()" />
                             <x-book-detail-field :name="'Shipping method'" :value="$order->shippingMethod->name" />
+                                <x-book-detail-field :name="'Shipping cost'" :value="$order->shippingMethod->cost . ' Kč'" />
                             <x-book-detail-field :name="'Payment method'" :value="$order->paymentMethod->type" />
                         </dl>
                     </div>
@@ -37,7 +38,7 @@
                     <x-table-row
                         :row="[$item->book->name, $item->count, $item->unit_price . ' Kč', $item->count * $item->unit_price . ' Kč']" />
                 @empty
-                    <x-table-row :row["'-', '-' , '-' , '-'"] />
+                    <x-table-row :row="['-', '-' , '-' , '-']" />
                 @endforelse
             </x-table>
         </div>

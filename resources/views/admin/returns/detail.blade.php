@@ -18,8 +18,8 @@
                             <dl>
                                 <x-book-detail-field :name="'Refund created'" :value="date('d.m.Y h:i', strtotime($refund->created_at))" />
                                 <x-book-detail-field :name="'Order ID'" :value="$refund->order->id" />
-                                <x-book-detail-field :name="'Status'" :value="$refund->status" />
-                                <x-book-detail-field :name="'Result'" :value="$refund->result ?? '-'" />
+                                <x-book-detail-field :name="'Status'" :value="$refund->status()" />
+                                <x-book-detail-field :name="'Result'" :value="$refund->result() ?? '-'" />
                                 <x-book-detail-field :name="'Assignee'" :value="$refund->assignee->name ?? '-'" />
                                 <x-book-detail-field :name="'Completed'" :value="$refund->completed_at ?? 'No'" />
                                 <x-book-detail-field :name="'Customer'" :value="$refund->order->customer->name . ' ' . $refund->order->customer->surname" />

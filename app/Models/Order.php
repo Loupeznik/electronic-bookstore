@@ -66,6 +66,28 @@ class Order extends Model
 
     public function orderTotal($currency = null)
     {
-        return $this->sum + $this->vat . ' ' . $currency;
+        return $this->sum + $this->vat + $this->shippingMethod->cost . ' ' . $currency;
+    }
+
+    public function status()
+    {
+        switch($this->status)
+        {
+            case 0:
+                return 'Accepted'; // Order has been made and accepted into processing
+                break;
+            case 1:
+                return 'In progress'; // Order is being processed
+                break;
+            case 2:
+                return 'Completed'; // Order is complete
+                break;
+            case 3:
+                return 'Cancelled'; // Order has been cancelled
+                break;
+            case 4:
+                return 'Problem'; // Problem with the order (refund was requested, books no longer available)
+                break;
+        }
     }
 }

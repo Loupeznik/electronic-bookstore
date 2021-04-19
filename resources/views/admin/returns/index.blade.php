@@ -22,7 +22,7 @@
                 <x-table :columns="['ID', 'Order ID', 'Status', 'Assigned to', 'Created at', 'Actions']">
                     @forelse ($returns as $refund)
                         <x-table-row
-                            :row="[$refund->id, $refund->order->id, $refund->status, $refund->assignee->name ?? '-', date('d.m.Y h:i', strtotime($refund->created_at))]"
+                            :row="[$refund->id, $refund->order->id, $refund->status(), $refund->assignee->name ?? '-', date('d.m.Y h:i', strtotime($refund->created_at))]"
                             :actions="['edit', 'show']" :id="$refund->id" />
                     @empty
                         <x-table-row :row="['-','-','-','-','-','-']" />

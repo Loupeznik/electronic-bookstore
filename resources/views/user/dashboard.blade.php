@@ -62,11 +62,11 @@
                 <x-table :columns="['ID', 'Items', 'Order date', 'Status', 'Total', 'Action']">
                     @forelse($user->customer->orders as $order)
                         <x-table-row
-                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status, $order->sum + $order->vat]" 
+                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status(), $order->orderTotal('Kč')]" 
                             :actions="['show']" :id="$order->id" :path="'user/orders'"
                             />
                     @empty
-                        <x-table-row :row["'-', '-', '-', '-', '-'"] />
+                        <x-table-row :row="['-', '-', '-', '-', '-']" />
                     @endforelse
                 </x-table>
             </div>

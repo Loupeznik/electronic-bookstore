@@ -22,12 +22,12 @@
                     @forelse($orders as $order)
                     @if ($order->hasReturn())
                         <x-table-row
-                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status, $order->orderTotal('Kč')]"
+                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status(), $order->orderTotal('Kč')]"
                             :actions="['show']" :id="$order->id"
                              />
                     @else
                         <x-table-row
-                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status, $order->orderTotal('Kč')]"
+                            :row="[$order->id, $order->items->count(), date('d.m.Y h:i', strtotime($order->created_at)), $order->status(), $order->orderTotal('Kč')]"
                             :actions="['show', 'refund']" :id="$order->id"
                              />
                     @endif

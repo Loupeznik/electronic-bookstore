@@ -27,4 +27,36 @@ class OrderReturn extends Model
     {
         return $this->belongsTo(User::class, 'assignee_id', 'id');
     }
+
+    public function status()
+    {
+        switch($this->status)
+        {
+            case 0:
+                return 'Received'; // Refund request received
+                break;
+            case 1:
+                return 'Under review'; // Refund request is being looked into
+                break;
+            case 2:
+                return 'Finished'; // Refund request was accepted or denied
+                break;
+        }
+    }
+
+    public function result()
+    {
+        switch($this->status)
+        {
+            case 0:
+                return 'Order refunded';
+                break;
+            case 1:
+                return 'Exchanged goods';
+                break;
+            case 2:
+                return 'Return not accepted';
+                break;
+        }
+    }
 }
