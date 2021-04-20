@@ -25,6 +25,8 @@ Route::group(['middleware' => 'web'], function () {
     // Route::redirect('/checkout/payment', '/checkout/success', 301); // This route would redirect to an external payment gate
     Route::get('/checkout/success', 'OrderController@success');
     Route::post('/checkout/register', 'CustomerController@store')->name('customers.store');
+    Route::get('/contact', 'ContactFormController@create')->name('contact.create');
+    Route::post('/contact', 'ContactFormController@store')->name('contact.store');
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(function() {
@@ -32,12 +34,13 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::resource('/authors', 'AuthorController');
     Route::resource('/categories', 'CategoryController');
     Route::resource('/books', 'BookController');
-    Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
+    Route::resource('/users', 'UserController')->except(['edit', 'update', 'destroy']);
     Route::resource('/shipping-methods', 'ShippingMethodController')->except('show');
     Route::resource('/customers', 'CustomerController')->except(['create', 'store']);
     Route::resource('/refunds', 'OrderReturnController');
     Route::get('/orders', 'OrderController@list')->name('orders.index');
     Route::resource('/orders', 'OrderController')->except(['index', 'create', 'store']);
+    Route::resource('/contact', 'ContactFormController')->only(['index', 'show', 'destroy']);
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
