@@ -7,7 +7,7 @@ use Livewire\Component;
 class CartItem extends Component
 {
     public $item;
-    //protected $listeners = ['removeItem' => 'render'];
+    protected $listeners = ['qtyChange' => '$refresh'];
 
     public function render()
     {

@@ -55,6 +55,16 @@ class OrderController extends Controller
         // Get the customer's cart
         $cart = Cart::with('items')->where('session_id', session()->getId())->first();
 
+        // Check availability for each item
+        foreach ($cart->items as $item)
+        {
+            if (! $item->book->checkAvailability($item->count))
+            {
+                $item->delete();
+                return redirect('/checkout')->with('status', 'error')->with('message', 'Item ' . $item->book->name . ' is not available in selected quantity');
+            }
+        }
+
         // Register a new customer or use an old one with the inserted customer info
         $customer = Customer::firstOrCreate($this->validateCustomerInfo($request));
 

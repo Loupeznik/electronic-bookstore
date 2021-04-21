@@ -32,6 +32,18 @@ class AddToCart extends Component
         $this->emit('removeItem');
     }
 
+    public function countPlus($itemId)
+    {
+        CartItem::find($itemId)->increment('count');
+        $this->emit('qtyChange');
+    }
+
+    public function countMinus($itemId)
+    {
+        CartItem::find($itemId)->decrement('count');
+        $this->emit('qtyChange');
+    }
+
     public function render()
     {
         return view('livewire.add-to-cart');

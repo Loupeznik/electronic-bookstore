@@ -8,7 +8,7 @@ use App\Models\Cart as CartModel;
 class Cart extends Component
 {
     public $cart;
-    protected $listeners = ['removeItem' => '$refresh'];
+    protected $listeners = ['removeItem' => '$refresh', 'qtyChange' => '$refresh'];
 
     public function mount()
     {

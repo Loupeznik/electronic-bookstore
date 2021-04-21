@@ -7,6 +7,11 @@
                     <div class="space-y-1">
                         <h3 class="text-lg font-semibold text-left sm:pr-8">{{ $item->book->name }}</h3>
                         <p class="text-sm text-left"> {{ $item->book->author->name . ' ' . $item->book->author->surname }} </p>
+                        <div class="flex flex-row space-x-2 w-full items-center rounded-lg">
+                            <livewire:add-to-cart :itemId="$item->id" :buttonType="'countMinus'" />
+                            <p> {{ $item->count }} </p>
+                            <livewire:add-to-cart :itemId="$item->id" :buttonType="'countPlus'" />
+                        </div>
                     </div>
                     <div class="text-right">
                         <p class="text-lg font-semibold"> {{ $item->book->sale_price ?? $item->book->price }} {{ config('app.currency', null) }}</p>

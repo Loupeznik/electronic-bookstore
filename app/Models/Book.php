@@ -50,4 +50,16 @@ class Book extends Model
     {
         return $price + ($price * (config('app.vat_pct', 21) / 100));
     }
+
+    /**
+     * Check if desired number of books is available
+     * 
+     * @param int $count
+     * @return bool
+     */
+    public function checkAvailability(int $count)
+    {
+        if ($this->available > $count) return true;
+        return false;
+    }
 }
