@@ -23,9 +23,9 @@
                             <dl>
                                 <x-book-detail-field :name="'Category'" :value="$book->category->name" />
                                 <x-book-detail-field :name="'ISBN'" :value="$book->isbn" />
-                                <x-book-detail-field :name="'Price'" :value="$book->price . ' Kč'" /> <!-- Parametrize by config's currency value -->
+                                <x-book-detail-field :name="'Price'" :value="$book->price . ' ' . config('app.currency', null)" /> <!-- Parametrize by config's currency value -->
                                 @isset($book->sale_price)
-                                    <x-book-detail-field :name="'Sale price'" :value="$book->sale_price . ' Kč'" /> <!-- Parametrize by config's currency value -->
+                                    <x-book-detail-field :name="'Sale price'" :value="$book->sale_price . ' ' . config('app.currency', null)" /> <!-- Parametrize by config's currency value -->
                                 @else
                                     <x-book-detail-field :name="'Sale price'" :value="'Book is not on sale'" /> 
                                 @endisset

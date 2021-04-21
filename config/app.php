@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Prague',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'cz',
 
     /*
     |--------------------------------------------------------------------------
@@ -122,6 +122,13 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    /*
+    / Currency and VAT configuration.
+    */
+
+    'currency' => 'CZK', // Basic currency for displaying prices
+    'vat_pct' => 10, // VAT (% of base price)
 
     /*
     |--------------------------------------------------------------------------

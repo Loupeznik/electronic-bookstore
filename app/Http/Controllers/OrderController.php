@@ -62,7 +62,7 @@ class OrderController extends Controller
         $order = Order::create([
             'cart_id' => $cart->id,
             'sum' => $cart->overallSum(),
-            'vat' => number_format($cart->overallSum() * .21, 2),
+            'vat' => number_format($cart->overallSum() * (config('app.vat_pct', 21) / 100), 2), // Calculate VAT as per config/app.php
             'status' => 0,
             'payment_method_id' => PaymentMethod::firstOrCreate([
                 'customer_id' => $customer->id,

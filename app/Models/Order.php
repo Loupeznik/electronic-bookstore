@@ -64,9 +64,9 @@ class Order extends Model
         return false;
     }
 
-    public function orderTotal($currency = null)
+    public function orderTotal()
     {
-        return $this->sum + $this->vat + $this->shippingMethod->cost . ' ' . $currency;
+        return $this->sum + $this->vat + $this->shippingMethod->cost . ' ' . config('app.currency', null);
     }
 
     public function status()

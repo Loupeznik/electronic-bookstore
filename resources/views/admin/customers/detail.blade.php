@@ -44,7 +44,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-table :columns="['ID', 'Status', 'Created at', 'Total', 'Action']">
                     @forelse($customer->orders as $order)
-                        <x-table-row :row="[$order->id, $order->status(), date('d.m.Y h:i', strtotime($order->created_at)), $order->orderTotal('Kč')]" :actions="['show']" :id="$order->id" :path="'admin/orders'" />
+                        <x-table-row :row="[$order->id, $order->status(), date('d.m.Y h:i', strtotime($order->created_at)), $order->orderTotal()]" :actions="['show']" :id="$order->id" :path="'admin/orders'" />
                     @empty
                         <x-table-row :row="['-','-','-','-', '-']" />
                     @endforelse

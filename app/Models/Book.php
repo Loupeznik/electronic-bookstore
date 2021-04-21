@@ -45,4 +45,9 @@ class Book extends Model
     {
         return $this->hasMany(OrderItems::class);
     }
+
+    public function vatPrice($price)
+    {
+        return $price + ($price * (config('app.vat_pct', 21) / 100));
+    }
 }

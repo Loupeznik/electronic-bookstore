@@ -9,7 +9,7 @@
                         <p class="text-sm text-left"> {{ $item->book->author->name . ' ' . $item->book->author->surname }} </p>
                     </div>
                     <div class="text-right">
-                        <p class="text-lg font-semibold"> {{ $item->book->sale_price ?? $item->book->price }} Kč</p>
+                        <p class="text-lg font-semibold"> {{ $item->book->sale_price ?? $item->book->price }} {{ config('app.currency', null) }}</p>
                     </div>
                 </div>
                 <div class="flex text-sm divide-x">

@@ -22,7 +22,7 @@
                 <x-table :columns="['Name', 'ISBN', 'Price', 'Qty Available',  'Category', 'Last update', 'Actions']">
                     @forelse ($books as $book)
                         <x-table-row
-                            :row="[$book->name, $book->isbn, $book->sale_price ?? $book->price, $book->available, $book->category->name, date('d.m.Y h:i', strtotime($book->updated_at))]"
+                            :row="[$book->name, $book->isbn, $book->sale_price ?? $book->price . config('app.currency', null), $book->available, $book->category->name, date('d.m.Y h:i', strtotime($book->updated_at))]"
                             :actions="['edit', 'show', 'delete']" :id="$book->id" />
                     @empty
                         <x-table-row :row="['-','-','-','-','-','-','-']" />

@@ -20,14 +20,16 @@
                                                 <h3 class="font-semibold">{{ $item->book->name }}</h3>
                                                 <p class="text-sm"> {{ $item->book->author->name . ' ' . $item->book->author->surname }} </p>
                                                 <p class="text-sm">{{ __('Qty') }}: {{$item->count}}</p>
-                                                <p class="text-sm">{{ __('Price') }}: {{$item->book->price * $item->count}} Kč</p>
+                                                <p class="text-sm">{{ __('Price') }}: {{ $item->book->price * $item->count . ' ' . config('app.currency', null) }}</p>
                                             </div>
                                         </div>
                                     </div>
                             @endforeach
                             <div class="shadow-md rounded-lg w-1/2 mx-auto py-2 my-8 px-2 text-center text-gray-800">
                                 <h2 class="font-bold text-xl uppercase">{{ __('Total') }}</h2>
-                                <p class="font-semibold text-lg">{{ $cart->overallSum() }} Kč</p>
+                                <p class="font-semibold text-lg">
+                                    {{ $cart->overallSum() . ' ' . config('app.currency', null) }} <br> {{ __('plus selected shipping method cost and VAT where applicable') }}
+                                </p>
                             </div>
                             <div class="w-max mx-auto my-3">
                                 <x-front-action-button :link="'/cart'">
@@ -86,7 +88,7 @@
                                     <x-label for="shipping" :value="__('Shipping method')" />
                                     <x-input-select id="shipping" name="shipping_method" class="w-full" required>
                                         @forelse($shippingMethods as $method)
-                                            <option value="{{$method->id}}">{{$method->name}}</option>
+                                            <option value="{{ $method->id }}">{{ $method->name }} ( +{{ $method->cost . ' ' . config('app.currency', null) }})</option>
                                         @empty
                                             <option value="error">{{ __('No shipping methods found, contact administrator')}}</option>
                                         @endforelse

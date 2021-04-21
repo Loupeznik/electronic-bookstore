@@ -25,7 +25,7 @@
                             :row="[$customer->name, $customer->surname, $customer->user ? 'Yes' : 'No',  $customer->orders_count, $customer->payment_methods_count]"
                             :actions="['edit', 'show']" :id="$customer->id" />
                     @empty
-                        <x-table-row :row="['-','-','-']" />
+                        <x-table-row :row="['-','-','-','-','-','-']" />
                     @endforelse
                 </x-table>
             </div>

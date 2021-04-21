@@ -28,8 +28,9 @@
                     </p>
                 @endif
                 <div class="flex px-1">
-                    <p class="title-font font-medium text-2xl text-gray-900">{{ $book->sale_price ?? $book->price }}
-                        Kč</p>
+                        <p class="title-font font-medium text-2xl text-gray-900">
+                            {{  $book->sale_price ?? $book->price }} {{ config('app.currency', null) }}
+                        </p>
                     <livewire:add-to-cart :bookId="$book->id" />
                 </div>
             </div>

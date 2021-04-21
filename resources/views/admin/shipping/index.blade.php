@@ -22,7 +22,7 @@
                 <x-table :columns="['Name', 'Cost', 'Actions']">
                     @forelse ($methods as $method)
                         <x-table-row
-                            :row="[$method->name, $method->cost]"
+                            :row="[$method->name, $method->cost . ' ' . config('app.currency', null)]"
                             :actions="['edit']" :id="$method->id" />
                     @empty
                         <x-table-row :row="['-','-','-']" />
