@@ -51,7 +51,6 @@ class UserProfileController extends Controller
         {
             return redirect('/user/orders')->with('status', 'error')->with('message', 'You may create a refund request only for you own orders');
         }
-        $order = $order->with('items')->first();
 
         return view('user.orders.detail', compact('order'));
     }
@@ -68,7 +67,6 @@ class UserProfileController extends Controller
         {
             return redirect('/user/orders')->with('status', 'error')->with('message', 'You may create a refund request only for you own orders');
         }
-        $order = $order->with('items')->first();
 
         return view('user.orders.refund', compact('order'));
     }
