@@ -8,13 +8,13 @@
         <i class="ri-delete-bin-2-line mr-2"></i> {{ __('Remove') }}
     </button>
 @elseif ($buttonType == 'countPlus')
-<button class="focus:outline-none bg-pink-700 hover:bg-pink-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center" wire:click.prevent="countPlus({{$itemId}})">
+<button class="focus:outline-none bg-blue-300 hover:bg-blue-500 text-white font-bold py-1 px-1 rounded-full inline-flex items-center" wire:click.prevent="countPlus({{$itemId}})">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
     </svg>
   </button>
 @elseif ($buttonType == 'countMinus')
-<button class="focus:outline-none bg-pink-700 hover:bg-pink-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center" wire:click.prevent="countMinus({{$itemId}})">
+<button class="focus:outline-none bg-blue-300 hover:bg-blue-500 text-white font-bold py-1 px-1 rounded-full inline-flex items-center" wire:click.prevent="countMinus({{$itemId}})">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
     </svg>
