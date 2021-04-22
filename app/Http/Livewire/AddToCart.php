@@ -18,11 +18,18 @@ class AddToCart extends Component
     public function addItem($bookId)
     {
         $cart = CartModel::where('session_id', session()->getId())->firstOrCreate(['session_id' => session()->getId()]);
-        CartItem::create([
-            'cart_id' => $cart->id,
-            'book_id' => $bookId,
-            'count' => 1
-        ]);
+        if ($cart->items->contains('book_id', $bookId))
+        {
+            $cart->items->where('book_id', $bookId)->first()->increment('count');
+        }
+        else
+        {
+            CartItem::create([
+                'cart_id' => $cart->id,
+                'book_id' => $bookId,
+                'count' => 1
+            ]);
+        }
         $this->emit('addItem');
     }
 
@@ -30,6 +37,18 @@ class AddToCart extends Component
     {
         CartItem::find($itemId)->delete();
         $this->emit('removeItem');
+    }
+
+    public function countPlus($itemId)
+    {
+        CartItem::find($itemId)->increment('count');
+        $this->emit('qtyChange');
+    }
+
+    public function countMinus($itemId)
+    {
+        CartItem::find($itemId)->decrement('count');
+        $this->emit('qtyChange');
     }
 
     public function render()
