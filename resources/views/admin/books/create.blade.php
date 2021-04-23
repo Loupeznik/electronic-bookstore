@@ -11,14 +11,10 @@
         </x-section-header>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @empty($authors)
-                <x-alert>
-                    No authors were found
-                </x-alert>
+                <x-alert :dismissable="false" :status="'Warning'" :message="'No authors were found'" />
             @endempty
             @empty($categories)
-                <x-alert>
-                    No categories were found
-                </x-alert>
+                <x-alert :dismissable="false" :status="'Warning'" :message="'No categories were found'" />
             @endempty
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">

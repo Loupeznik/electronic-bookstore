@@ -10,6 +10,11 @@
                     <div class="grid grid-cols-2">
                         <div class="w-full">
                             <h2 class="text-lg uppercase font-semibold mb-3">{{ __('Order items') }}</h2>
+                            <div class="w-1/2 mx-auto">
+                                @if (session('status'))
+                                <x-alert :dismissable="false" :status="session('status')" :message="session('message')" />
+                                @endif
+                            </div>
                             @foreach($cart->items as $item)
                                     <div class="shadow-md rounded-lg w-1/2 mx-auto py-2 my-8 px-2 text-right">
                                         <div class="grid grid-cols-2 gap-0">

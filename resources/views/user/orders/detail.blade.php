@@ -6,9 +6,11 @@
     </x-slot>
 
     @if ($order->hasReturn())
-    <x-alert>
-        {{ __('Refund request is in progress for this order') }} <!-- FORMATTING -->
-    </x-alert>
+        <div class="py-4">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <x-alert :dismissable="false" :status="'Warning'" :message="'Refund request is in progress for this order'" />
+            </div>
+        </div>
     @endif
 
     <x-order-detail :order="$order" />

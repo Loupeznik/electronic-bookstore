@@ -13,9 +13,7 @@
             </x-section-header>
 
             @if (session('status'))
-                <x-dismissable-alert>
-                    {{ session('status') }}
-                </x-dismissable-alert>
+                <x-alert :dismissable="true" :status="session('status')" :message="session('message')" />
             @endif
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">

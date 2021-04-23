@@ -30,7 +30,7 @@ class CategoryController extends Controller
     {
         $category->update($this->validateInput($request));
 
-        return redirect('/admin/categories')->with('status', 'Category ' . $category->name . ' has been updated');
+        return redirect('/admin/categories')->with('status', 'Success')->with('message', 'Category ' . $category->name . ' has been updated');
     }
 
     public function create()
@@ -42,14 +42,14 @@ class CategoryController extends Controller
     {
         Category::create($this->validateInput($request));
 
-        return redirect('/admin/categories')->with('status', 'Success');
+        return redirect('/admin/categories')->with('status', 'Success')->with('message', 'Category ' . $request->name . ' has been updated');
     }
 
     public function destroy($id)
     {
         Category::where('id', $id)->delete();
 
-        return redirect('/admin/categories')->with('status', 'Success');
+        return redirect('/admin/categories')->with('status', 'Success')->with('message', 'Category has been deleted');
     }
 
     private function validateInput($input) 

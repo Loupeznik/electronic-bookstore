@@ -58,9 +58,9 @@ class OrderController extends Controller
         // Check availability for each item
         foreach ($cart->items as $item)
         {
-            if (! $item->book->checkAvailability($item->count))
+            if ($item->book->checkAvailability($item->count) == false)
             {
-                $item->delete();
+                //$item->delete();
                 return redirect('/checkout')->with('status', 'error')->with('message', 'Item ' . $item->book->name . ' is not available in selected quantity');
             }
         }

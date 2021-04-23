@@ -6,9 +6,11 @@
     </x-slot>
 
     @if (session('status'))
-    <x-alert>
-        {{ session('status') }}
-    </x-alert>
+        <div class="py-4">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <x-alert :dismissable="true" :status="session('status')" :message="session('message')" />
+            </div>
+        </div>
     @endif
 
     @if (Auth::user()->hasCustomer())

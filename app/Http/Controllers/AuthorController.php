@@ -30,7 +30,7 @@ class AuthorController extends Controller
     {
         $author->update($this->validateInput($request));
 
-        return redirect('/admin/authors')->with('status', 'Author ' . $author->name . ' ' . $author->surname . ' has been updated');
+        return redirect('/admin/authors')->with('status', 'Success')->with('message', 'Author ' . $author->name . ' ' . $author->surname . ' has been updated');
     }
 
     public function create()
@@ -42,14 +42,14 @@ class AuthorController extends Controller
     {
         Author::create($this->validateInput($request));
 
-        return redirect('/admin/authors')->with('status', 'Success');
+        return redirect('/admin/authors')->with('status', 'Success')->with('message', 'Author ' . $request->name . ' ' . $request->surname . ' has been added');
     }
 
     public function destroy($id)
     {
         Author::where('id', $id)->delete();
 
-        return redirect('/admin/authors')->with('status', 'Success');
+        return redirect('/admin/authors')->with('status', 'Success')->with('message', 'Author has been deleted');
     }
 
     private function validateInput($input) 

@@ -43,7 +43,7 @@ class BookController extends Controller
             $this->uploadPhoto($request->file('photo'), $book);
         }
 
-        return redirect('/admin/books')->with('status', 'Book ' . $book->name . ' has been updated');
+        return redirect('/admin/books')->with('status', 'Success')->with('message', 'Book ' . $book->name . ' has been updated');
     }
 
     public function create()
@@ -63,14 +63,14 @@ class BookController extends Controller
             $this->uploadPhoto($request->file('photo'), $book);
         }
 
-        return redirect('/admin/books')->with('status', 'Success');
+        return redirect('/admin/books')->with('status', 'Success')->with('message', 'Book ' . $request->name . ' has been created');
     }
 
     public function destroy($id)
     {
         Book::where('id', $id)->delete();
 
-        return redirect('/admin/books')->with('status', 'Success');
+        return redirect('/admin/books')->with('status', 'Success')->with('message', 'Book has been deleted');
     }
 
     private function validateInput($input) 
