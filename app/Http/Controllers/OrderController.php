@@ -91,6 +91,9 @@ class OrderController extends Controller
                 'count' => $item->count,
                 'unit_price' => $item->book->price
             ]);
+            $item->book->update([
+                'available' => $item->book->available - $item->count
+            ]);
             $item->delete();
         }
 
