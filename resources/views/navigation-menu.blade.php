@@ -16,48 +16,28 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     @if(Auth::user()->isAdmin() && request()->is('admin/*'))
-                        <x-jet-nav-link href="{{ route('orders.index') }}" :active="request()->routeIs('orders.*')">{{ __('Orders') }}</x-jet-nav-link>
-                        <x-nav-dropdown-parent :active="request()->routeIs('refunds.*')">
+                        <x-jet-nav-link href="{{ route('customers.index') }}" :active="request()->routeIs('customers.*')">
+                            {{ __('Customers') }}
+                        </x-jet-nav-link>
+                        <x-nav-dropdown-parent :active="request()->routeIs('orders.*') || request()->routeIs('returns.*')">
                             <x-slot name="name">
-                                {{ __('Returns') }}
+                                {{ __('Orders') }}
                             </x-slot>
                             <x-slot name="children">
-                                <a href="{{ route('refunds.index') }}">{{ __('Pending requests') }}</a>
-                                <a href="{{ route('refunds.create') }}">{{ __('Create a refund request') }}</a>
+                                <a href="{{ route('orders.index') }}">{{ __('Orders') }}</a>
+                                <a href="{{ route('refunds.index') }}">{{ __('Returns') }}</a>
+                                <a href="{{ route('refunds.create') }}">{{ __('Create a return') }}</a>
                             </x-slot>
                         </x-nav-dropdown-parent>
-                        <x-nav-dropdown-parent :active="request()->routeIs('customers.*')">
+                        <x-nav-dropdown-parent :active="request()->routeIs('books.*') || request()->routeIs('authors.*') || request()->routeIs('categories.*')">
                             <x-slot name="name">
-                                {{ __('Customers') }}
-                            </x-slot>
-                            <x-slot name="children">
-                                <a href="{{ route('customers.index') }}">{{ __('Customers') }}</a>
-                                <a href="#">{{ __('Contact forms') }}</a>
-                            </x-slot>
-                        </x-nav-dropdown-parent>
-                        <x-nav-dropdown-parent :active="request()->routeIs('books.*')">
-                            <x-slot name="name">
-                                {{ __('Books') }}
+                                {{ __('Bookstore') }}
                             </x-slot>
                             <x-slot name="children">
                                 <a href="{{ route('books.index') }}">{{ __('List of books') }}</a>
                                 <a href="{{ route('books.create') }}">{{ __('Add a book') }}</a>
-                            </x-slot>
-                        </x-nav-dropdown-parent>
-                        <x-nav-dropdown-parent :active="request()->routeIs('authors.*')">
-                            <x-slot name="name">
-                                {{ __('Authors') }}
-                            </x-slot>
-                            <x-slot name="children">
                                 <a href="{{ route('authors.index') }}">{{ __('List of authors') }}</a>
                                 <a href="{{ route('authors.create') }}">{{ __('Add an author') }}</a>
-                            </x-slot>
-                        </x-nav-dropdown-parent>
-                        <x-nav-dropdown-parent :active="request()->routeIs('categories.*')">
-                            <x-slot name="name">
-                                {{ __('Categories') }}
-                            </x-slot>
-                            <x-slot name="children">
                                 <a href="{{ route('categories.index') }}">{{ __('List of categories') }}</a>
                                 <a href="{{ route('categories.create') }}">{{ __('Add a category') }}</a>
                             </x-slot>
@@ -71,13 +51,15 @@
                                 <a href="{{ route('users.create') }}">{{ __('Add user') }}</a>
                             </x-slot>
                         </x-nav-dropdown-parent>
-                        <x-nav-dropdown-parent :active="request()->routeIs('shipping-methods.*')">
+                        <x-nav-dropdown-parent :active="request()->routeIs('shipping-methods.*') || request()->routeIs('contact.*')">
                             <x-slot name="name">
-                                {{ __('Shipping methods') }}
+                                {{ __('Administration') }}
                             </x-slot>
                             <x-slot name="children">
                                 <a href="{{ route('shipping-methods.index') }}">{{ __('List of shipping methods') }}</a>
                                 <a href="{{ route('shipping-methods.create') }}">{{ __('Add a shipping method') }}</a>
+                                <a href="{{ route('contact.index') }}">{{ __('Contact forms') }}</a>
+                                <a href="#">{{ __('Reports') }}</a>
                             </x-slot>
                         </x-nav-dropdown-parent>
                     @endif
