@@ -9,7 +9,7 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = Author::withCount('books')->orderBy('surname')->get();
+        $authors = Author::withCount('books')->orderBy('surname')->paginate(30);
 
         return view('admin.authors.index', compact('authors'));
     }

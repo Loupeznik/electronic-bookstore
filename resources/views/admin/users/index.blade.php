@@ -27,6 +27,9 @@
                     @endforelse
                 </x-table>
             </div>
+            <div class="mt-3 w-1/2 mx-auto">
+                {{ $users->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>

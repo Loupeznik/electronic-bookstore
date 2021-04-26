@@ -13,10 +13,15 @@ class AdminController extends Controller
     public function index()
     {
         $orders = Order::latest()->take(10)->get();
-        $assignedOrders = Order::where('assignee_id', Auth::user()->id)->latest()->get();
-        $assignedRefunds = OrderReturn::where('assignee_id', Auth::user()->id)->latest()->get();
-        $assignedConForms = ContactForm::where('assignee_id', Auth::user()->id)->latest()->get();
+        $assignedOrders = Order::where('assignee_id', Auth::user()->id)->latest()->take(10)->get();
+        $assignedRefunds = OrderReturn::where('assignee_id', Auth::user()->id)->latest()->take(10)->get();
+        $assignedConForms = ContactForm::where('assignee_id', Auth::user()->id)->latest()->take(10)->get();
 
         return view('dashboard', compact(['orders', 'assignedOrders', 'assignedRefunds', 'assignedConForms']));
+    }
+
+    public function reports()
+    {
+        return view('admin.reports');
     }
 }

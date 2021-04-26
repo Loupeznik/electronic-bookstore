@@ -144,7 +144,7 @@ class OrderController extends Controller
      */
     public function list()
     {
-        $orders = Order::with(['items', 'customer', 'paymentMethod', 'shippingMethod'])->whereNotIn('status', [2,3])->latest()->paginate(20);
+        $orders = Order::with(['items', 'customer', 'paymentMethod', 'shippingMethod'])->whereNotIn('status', [2,3])->latest()->paginate(30);
 
         return view('admin.orders.index', compact('orders'));
     }

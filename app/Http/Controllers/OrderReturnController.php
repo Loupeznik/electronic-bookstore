@@ -15,7 +15,7 @@ class OrderReturnController extends Controller
      */
     public function index()
     {
-        $returns = OrderReturn::with(['order', 'assignee'])->whereNull('result')->latest()->paginate(20);
+        $returns = OrderReturn::with(['order', 'assignee'])->whereNull('result')->latest()->paginate(30);
 
         return view('admin.returns.index', compact('returns'));
     }
@@ -27,7 +27,7 @@ class OrderReturnController extends Controller
      */
     public function finished()
     {
-        $returns = OrderReturn::with(['order', 'assignee'])->whereNotNull('result')->latest()->paginate(20);
+        $returns = OrderReturn::with(['order', 'assignee'])->whereNotNull('result')->latest()->paginate(30);
 
         return view('admin.returns.index', compact('returns'));
     }

@@ -13,7 +13,7 @@ class ContactFormController extends Controller
      */
     public function index()
     {
-        $forms = ContactForm::where('status', 0)->get();
+        $forms = ContactForm::where('status', 0)->paginate(30);
 
         return view('admin.contact.index', compact('forms'));
     }

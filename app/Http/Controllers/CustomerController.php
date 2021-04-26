@@ -20,7 +20,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::with(['user'])->withCount(['paymentMethods', 'orders'])->simplePaginate(10);
+        $customers = Customer::with(['user'])->withCount(['paymentMethods', 'orders'])->paginate(30);
 
         return view('admin.customers.index', compact('customers'));
     }
