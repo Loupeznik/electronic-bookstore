@@ -16,6 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     @if(Auth::user()->isAdmin() && request()->is('admin/*'))
+                        @unless(Auth::user()->isEditor())
                         <x-jet-nav-link href="{{ route('customers.index') }}" :active="request()->routeIs('customers.*')">
                             {{ __('Customers') }}
                         </x-jet-nav-link>
@@ -29,6 +30,7 @@
                                 <a href="{{ route('refunds.create') }}">{{ __('Create a return') }}</a>
                             </x-slot>
                         </x-nav-dropdown-parent>
+                        @endunless
                         <x-nav-dropdown-parent :active="request()->routeIs('books.*') || request()->routeIs('authors.*') || request()->routeIs('categories.*')">
                             <x-slot name="name">
                                 {{ __('Bookstore') }}
@@ -42,6 +44,7 @@
                                 <a href="{{ route('categories.create') }}">{{ __('Add a category') }}</a>
                             </x-slot>
                         </x-nav-dropdown-parent>
+                        @unless(Auth::user()->isEditor())
                         <x-nav-dropdown-parent :active="request()->routeIs('users.*')">
                             <x-slot name="name">
                                 {{ __('Users') }}
@@ -62,6 +65,7 @@
                                 <a href="#">{{ __('Reports') }}</a>
                             </x-slot>
                         </x-nav-dropdown-parent>
+                        @endunless
                     @endif
                     @if (Auth::user()->role == 0 || request()->is('user/*'))
                         <x-nav-dropdown-parent :active="request()->routeIs('methods.*')">

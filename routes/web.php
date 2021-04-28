@@ -34,13 +34,13 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::resource('/authors', 'AuthorController');
     Route::resource('/categories', 'CategoryController');
     Route::resource('/books', 'BookController');
-    Route::resource('/users', 'UserController')->except(['edit', 'update', 'destroy']);
-    Route::resource('/shipping-methods', 'ShippingMethodController')->except('show');
-    Route::resource('/customers', 'CustomerController')->except(['create', 'store']);
-    Route::resource('/refunds', 'OrderReturnController');
-    Route::get('/orders', 'OrderController@list')->name('orders.index');
-    Route::resource('/orders', 'OrderController')->except(['index', 'create', 'store']);
-    Route::resource('/contact', 'ContactFormController')->only(['index', 'show', 'destroy']);
+    Route::resource('/users', 'UserController')->middleware('auth.superuser')->except(['edit', 'update', 'destroy'])->middleware('auth.superuser');
+    Route::resource('/shipping-methods', 'ShippingMethodController')->except('show')->middleware('auth.superuser');
+    Route::resource('/customers', 'CustomerController')->except(['create', 'store'])->middleware('auth.superuser');
+    Route::resource('/refunds', 'OrderReturnController')->middleware('auth.superuser');
+    Route::get('/orders', 'OrderController@list')->name('orders.index')->middleware('auth.superuser');
+    Route::resource('/orders', 'OrderController')->except(['index', 'create', 'store'])->middleware('auth.superuser');
+    Route::resource('/contact', 'ContactFormController')->only(['index', 'show', 'destroy'])->middleware('auth.superuser');
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {
@@ -51,3 +51,7 @@ Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function(
     Route::post('/orders/{order}/refund', 'UserProfileController@refundStore')->name('refund.store');
     Route::resource('/methods', 'PaymentMethodController')->except('show');
 });
+
+// Section main page redirects
+Route::redirect('/admin', '/admin/dashboard');
+Route::redirect('/user', '/user/dashboard');

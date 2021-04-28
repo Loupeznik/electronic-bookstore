@@ -101,6 +101,12 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isEditor()
+    {
+        if ($this->role == 1) return true;
+        return false;
+    }
+
     public function refunds()
     {
         return $this->hasMany(OrdeReturn::class, 'id', 'assignee');

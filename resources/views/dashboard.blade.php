@@ -8,6 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @unless(Auth::user()->isEditor())
                 <div class="grid grid-cols-4 gap-2 m-2">
                     <div>
                         <h3 class="text-xl text-center mb-1">{{ __('Latest orders') }}</h3>
@@ -65,6 +66,14 @@
                         </x-dashboard-item-wrapper>
                     </div>
                   </div>
+                @endunless
+                @if (session('status'))
+                <div class="py-4">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <x-alert :dismissable="false" :status="session('status')" :message="session('message')" />
+                    </div>
+                </div>
+            @endif
             </div>
         </div>
     </div>
