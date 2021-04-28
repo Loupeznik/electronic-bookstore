@@ -11,7 +11,13 @@ class PaymentMethodController extends Controller
 {
     public function index()
     {
-        $methods = PaymentMethod::where('customer_id', Auth::user()->customer->id)->get();
+        try {
+            $methods = PaymentMethod::where('customer_id', Auth::user()->customer->id)->get();
+        }
+        catch(\Exception $e)
+        {
+            return view('user.methods.index');
+        }
 
         return view('user.methods.index', compact('methods'));
     }

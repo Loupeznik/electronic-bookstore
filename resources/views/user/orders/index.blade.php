@@ -41,6 +41,10 @@
         </div>
     </div>
     @else
-        <x-alert>{{ __('No customer account is tied to this user') }}</x-alert>
+        <div class="py-4">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <x-alert :dismissable="false" :status="'Error'" :message="'No customer account is tied to this user'" />
+            </div>
+        </div>
     @endif
 </x-app-layout>
