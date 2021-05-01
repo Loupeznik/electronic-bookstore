@@ -18,7 +18,7 @@
                 {{ __('Author\'s books') }}
             </x-section-header>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-table :columns="['Name', 'In Stock', 'Price', 'Category']">
+                <x-table :columns="['Name', 'In stock', 'Price', 'Category']">
                     @forelse($author->books as $book)
                         <x-table-row :row="[$book->name, $book->available, $book->sale_price ?? $book->price, $book->category->name]" />
                     @empty

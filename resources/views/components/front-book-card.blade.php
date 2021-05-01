@@ -19,7 +19,7 @@
             <livewire:add-to-cart :buttonType="'listing'" :price="$book->sale_price ?? $book->price" :bookId="$book->id" />
         </div>
         <span class="block opacity-75 text-sm -mb-1">
-            by <x-hoverable-link link="{{'/authors/detail/' . $book->author->id}}">{{$book->author->name . ' ' . $book->author->surname}}</x-hoverable-link>
+            {{ __('by') }} <x-hoverable-link link="{{'/authors/detail/' . $book->author->id}}">{{$book->author->name . ' ' . $book->author->surname}}</x-hoverable-link>
         </span>
     </div>
 </div>

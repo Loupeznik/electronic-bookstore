@@ -10,7 +10,7 @@
                 {{ $category->name }}
             </x-section-header>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-table :columns="['Name', 'In Stock', 'Price', 'Action']">
+                <x-table :columns="['Name', 'In stock', 'Price', 'Action']">
                     @forelse($category->books as $book)
                         <x-table-row :row="[$book->name, $book->available, $book->sale_price ?? $book->price]" :actions="['show', 'edit']" :id="$book->id" :path="'books'" />
                     @empty

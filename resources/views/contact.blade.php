@@ -14,7 +14,7 @@
 			<input id="email" name="email" type="email" placeholder="{{ __('Your email') }}" class="block w-full p-2 rounded" value="{{ old('email') }}" required>
 		</div>
 		<div>
-			<label for="content" class="block mb-0.5 ml-0.5">Message </label>
+			<label for="content" class="block mb-0.5 ml-0.5">{{ __('Message') }} </label>
 			<textarea id="content" name="content" type="text" placeholder="{{ __('Your message') }}" class="block w-full p-2 rounded autoexpand" required>{{ old('content') }}</textarea>
 		</div>
 		<div>
@@ -27,7 +27,7 @@
         @endif
         @if (session('status'))
         <div class="rounded p-2 mt-2 bg-green-300">
-            {{ session('message') }}
+            {{ __(session('message')) }}
         </div>
         @endif
 	</form>

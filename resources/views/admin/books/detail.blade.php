@@ -18,7 +18,7 @@
                     </div>
                     <div class="p-4">
                         <h1 class="font-semibold text-xl">{{ $book->name }}</h1>
-                        <p>by {{ $book->author->name . ' ' . $book->author->surname }}</p>
+                        <p>{{ __('by') }} {{ $book->author->name . ' ' . $book->author->surname }}</p>
                         <div class="border-t mt-2">
                             <dl>
                                 <x-book-detail-field :name="'Category'" :value="$book->category->name" />
@@ -30,7 +30,7 @@
                                     <x-book-detail-field :name="'Sale price'" :value="'Book is not on sale'" /> 
                                 @endisset
                                 <x-book-detail-field :name="'Language'" :value="$book->language" />
-                                <x-book-detail-field :name="'Available Qty'" :value="$book->available" />
+                                <x-book-detail-field :name="'Qty Available'" :value="$book->available" />
                                 <x-book-detail-field :name="'Publisher'" :value="$book->publisher" />
                                 <x-book-detail-field :name="'Published'" :value="$book->year" />
                                 <x-book-detail-field :name="'Description'" :value="$book->description" />

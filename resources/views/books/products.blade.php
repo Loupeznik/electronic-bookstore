@@ -16,7 +16,7 @@
         @forelse($books as $book)
             <x-front-book-card :book="$book" />
         @empty
-            {{ __('No available listings') }}
+            <x-alert dismissable="false" :status="'Warning'" :message="'No available listings'" />
         @endforelse
     </div>
     <div class="w-1/2 mx-auto items-center mb-4">

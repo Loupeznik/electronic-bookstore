@@ -13,7 +13,7 @@
             <div class="mx-auto my-2 bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="p-4 text-center w-full">
-                        <h1 class="font-semibold text-xl">Refund id: {{ $refund->id }}</h1>
+                        <h1 class="font-semibold text-xl">{{ __('Refund id') }}: {{ $refund->id }}</h1>
                         <div class="border-t mt-2">
                             <dl>
                                 <x-book-detail-field :name="'Refund created'" :value="date('d.m.Y h:i', strtotime($refund->created_at))" />

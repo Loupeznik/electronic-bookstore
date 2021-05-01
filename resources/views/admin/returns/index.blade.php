@@ -17,7 +17,7 @@
             @endif
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-table :columns="['ID', 'Order ID', 'Status', 'Assigned to', 'Created at', 'Actions']">
+                <x-table :columns="['ID', 'Order ID', 'Status', 'Assigned To', 'Created at', 'Actions']">
                     @forelse ($returns as $refund)
                         <x-table-row
                             :row="[$refund->id, $refund->order->id, $refund->status(), $refund->assignee->name ?? '-', date('d.m.Y h:i', strtotime($refund->created_at))]"

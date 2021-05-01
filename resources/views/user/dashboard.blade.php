@@ -13,7 +13,7 @@
             <div class="mx-auto my-2 bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="p-4 text-center w-full">
-                        <h1 class="font-semibold text-xl">User details</h1>
+                        <h1 class="font-semibold text-xl">{{ __('User details') }}</h1>
                         <div class="border-t mt-2">
                             <dl>
                                 <x-book-detail-field :name="'Username'" :value="$user->name" />
@@ -30,7 +30,7 @@
                 <div class="mx-auto my-2 bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="md:flex">
                         <div class="p-4 text-center w-full">
-                            <h1 class="font-semibold text-xl">Customer details</h1>
+                            <h1 class="font-semibold text-xl">{{ __('Customer details') }}</h1>
                             <div class="border-t mt-2">
                                 <dl>
                                     <x-book-detail-field :name="'Street Address'"

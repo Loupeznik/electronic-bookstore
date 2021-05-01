@@ -10,9 +10,9 @@
         @elseif (Str::lower($status) == 'error')
             <i class="ri-forbid-2-line text-red-500 mr-2"></i>
         @endif
-        <div class="text-sm font-medium ml-3">{{ Str::ucfirst($status) }}</div>
+        <div class="text-sm font-medium ml-3">{{ __(Str::ucfirst($status)) }}</div>
     </div>
-    <div class="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">{{ $message }}</div>
+    <div class="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">{{ __($message) }}</div>
     @if ($dismissable == true)
         <div
             class="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">

@@ -20,9 +20,9 @@
                                     <x-book-detail-field :name="'Country'" :value="$customer->country" />
                                 <x-book-detail-field :name="'Phone number'" :value="$customer->phone" />
                                 @if ($customer->hasUser())
-                                    <x-book-detail-field :name="'Is registered'" :value="'YES'" />
+                                    <x-book-detail-field :name="'Is registered'" :value="'Yes'" />
                                 @else
-                                    <x-book-detail-field :name="'Is registered'" :value="'NO'" />
+                                    <x-book-detail-field :name="'Is registered'" :value="'No'" />
                                 @endif
                                 <x-book-detail-field :name="'Email'" :value="$customer->user->email ?? $customer->email" />
                                 <x-book-detail-field :name="'Order count'" :value="$customer->orders->count()" />

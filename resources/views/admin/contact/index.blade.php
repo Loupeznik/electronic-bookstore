@@ -17,7 +17,7 @@
             @endif
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-table :columns="['ID', 'Assigned to', 'Name', 'Email',  'Created AT', 'Actions']">
+                <x-table :columns="['ID', 'Assigned To', 'Name', 'Email',  'Created at', 'Actions']">
                     @forelse ($forms as $form)
                         <x-table-row
                             :row="[$form->id, $form->assignee->name ?? '-', $form->name, $form->email, date('d.m.Y h:i', strtotime($form->created_at))]"

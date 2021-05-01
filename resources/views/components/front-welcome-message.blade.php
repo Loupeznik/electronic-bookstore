@@ -6,10 +6,10 @@
             </div>
         </a>
         <h2 class="mb-4 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-            Welcome to Electronic Bookstore
+            {{ __('Welcome to Electronic Bookstore') }}
         </h2>
         <p class="text-base text-gray-700 md:text-lg sm:px-4">
-            An electronic bookstore prototype by Dominik Žárský.
+            {{ __('An electronic bookstore prototype by Dominik Žárský') }}.
         </p>
         <hr class="w-full mt-8 mb-1 border-gray-300" />
     </div>

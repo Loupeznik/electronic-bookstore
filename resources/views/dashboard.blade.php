@@ -16,7 +16,7 @@
                             @forelse ($orders as $order)
                                 <x-dashboard-item :link="'/admin/orders/' . $order->id" :header="'Order: ' . $order->id">
                                     {{ __('Customer') }}: {{ $order->customer->fullName() }}<br>
-                                    {{ __('Created At') }}: {{ $order->created_at }}<br>
+                                    {{ __('Created at') }}: {{ $order->created_at }}<br>
                                     {{ __('Total') }}: {{ $order->orderTotal() }}
                                 </x-dashboard-item>
                             @empty
@@ -30,11 +30,11 @@
                             @forelse ($assignedOrders as $order)
                                 <x-dashboard-item :link="'/admin/orders/' . $order->id" :header="'Order: ' . $order->id">
                                     {{ __('Customer') }}: {{ $order->customer->fullName() }}<br>
-                                    {{ __('Created At') }}: {{ $order->created_at }}<br>
+                                    {{ __('Created at') }}: {{ $order->created_at }}<br>
                                     {{ __('Total') }}: {{ $order->orderTotal() }}
                                 </x-dashboard-item>
                             @empty
-                                <p>{{ __('You haven\'t been assigned any orders') }}</p>
+                                <p>{{ __('You haven\'t been assigned any') . ' ' . __('orders') }}</p>
                             @endforelse
                         </x-dashboard-item-wrapper>
                     </div>
@@ -44,11 +44,11 @@
                             @forelse ($assignedRefunds as $return)
                                 <x-dashboard-item :link="'/admin/returns/' . $return->id" :header="'Return: ' . $order->id">
                                     {{ __('Customer') }}: {{ $return->order->customer->fullName() }}<br>
-                                    {{ __('Created At') }}: {{ $return->created_at }}<br>
+                                    {{ __('Created at') }}: {{ $return->created_at }}<br>
                                     {{ __('Status') }}: {{ $return->status() }}<br>
                                 </x-dashboard-item>
                             @empty
-                                <p>{{ __('You haven\'t been assigned any returns') }}</p>
+                                <p>{{ __('You haven\'t been assigned any') . ' ' . __('returns') }}</p>
                             @endforelse
                         </x-dashboard-item-wrapper>
                     </div>
@@ -58,10 +58,10 @@
                             @forelse ($assignedConForms as $form)
                                 <x-dashboard-item :link="'/admin/contact/' . $form->id" :header="'Form: ' . $form->id">
                                     {{ __('Sender') }}: {{ $form->name . ' ' . $form->email }}<br>
-                                    {{ __('Created At') }}: {{ $form->created_at }}<br>
+                                    {{ __('Created at') }}: {{ $form->created_at }}<br>
                                 </x-dashboard-item>
                             @empty
-                                <p>{{ __('You haven\'t been assigned any contact forms') }}</p>
+                                <p>{{ __('You haven\'t been assigned any') . ' ' . __('contact forms') }}</p>
                             @endforelse
                         </x-dashboard-item-wrapper>
                     </div>

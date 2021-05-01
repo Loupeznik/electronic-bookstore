@@ -19,7 +19,7 @@
                             <x-input id="order_id" name="order_id" type="text" value="{{ old('order_id') }}" required />
                         </x-input-oneline-wrapper>
                         <x-input-oneline-wrapper>
-                            <x-label for="assignee-id" :value="__('Assigned to')" />
+                            <x-label for="assignee-id" :value="__('Assigned To')" />
                             <x-input-select id="assignee_id" name="assignee_id" class="w-full" required>
                                 <option value="null">-</option>
                                 @forelse ($admins as $user)
@@ -32,18 +32,18 @@
                         <x-input-oneline-wrapper>
                             <x-label for="status" :value="__('Status')" />
                             <x-input-select id="status" name="status" class="w-full" required>
-                                <option value="0" @if (old('status') == 0) selected @endif>Received</option>
-                                <option value="1" @if (old('status') == 1) selected @endif>Under review</option>
-                                <option value="2" @if (old('status') == 2) selected @endif>Finished</option>
+                                <option value="0" @if (old('status') == 0) selected @endif>{{ __('Received') }}</option>
+                                <option value="1" @if (old('status') == 1) selected @endif>{{ __('Under review') }}</option>
+                                <option value="2" @if (old('status') == 2) selected @endif>{{ __('Finished') }}</option>
                             </x-input-select>
                         </x-input-oneline-wrapper>
                         <x-input-oneline-wrapper>
                             <x-label for="result" :value="__('Result')" />
                             <x-input-select id="result" name="result" class="w-full">
                                 <option value="">-</option>
-                                <option value="0">Order refunded</option>
-                                <option value="1">Exchanged goods</option>
-                                <option value="2">Refund not accepted</option>
+                                <option value="0">{{ __('Order refunded') }}</option>
+                                <option value="1">{{ __('Exchanged goods') }}</option>
+                                <option value="2">{{ __('Refund not accepted') }}</option>
                             </x-input-select>
                         </x-input-oneline-wrapper>
                         <x-input-oneline-wrapper>

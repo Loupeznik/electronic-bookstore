@@ -20,7 +20,7 @@
                             <x-input id="order_id" name="order_id" type="text" value="{{ $refund->order->id }}" required />
                         </x-input-oneline-wrapper>
                         <x-input-oneline-wrapper>
-                            <x-label for="assignee_id" :value="__('Assigned to')" />
+                            <x-label for="assignee_id" :value="__('Assigned To')" />
                             <x-input-select id="assignee_id" name="assignee_id" class="w-full" required>
                                 <option value="null">-</option>
                                 @forelse ($admins as $user)
