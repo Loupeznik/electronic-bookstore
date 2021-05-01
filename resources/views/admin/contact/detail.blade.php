@@ -26,6 +26,12 @@
                     </div>
                 </div>
             </div>
+            <form method="POST" action="/admin/contact/{{ $contact->id }}/complete">
+                @csrf
+                <button type="submit" class="py-2 px-4 mt-3 text-gray-800 bg-blue-300 border-2 border-transparent focus:outline-none transition duration-200 hover:text-blue-800  w-full ease-in text-center text-base font-semibold shadow-md rounded-lg ">
+                    {{ __('Set contact form as Complete') }}
+                </button>
+            </form>
         </div>
     </div>
 </x-app-layout>

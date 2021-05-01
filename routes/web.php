@@ -41,6 +41,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'auth.admin'])->group(functi
     Route::get('/orders', 'OrderController@list')->name('orders.index')->middleware('auth.superuser');
     Route::resource('/orders', 'OrderController')->except(['index', 'create', 'store'])->middleware('auth.superuser');
     Route::resource('/contact', 'ContactFormController')->only(['index', 'show', 'destroy'])->middleware('auth.superuser');
+    Route::post('/contact/{contact}/complete', 'ContactFormController@complete')->middleware('auth.superuser');
 });
 
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function() {

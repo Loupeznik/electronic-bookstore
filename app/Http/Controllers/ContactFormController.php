@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ContactForm;
+use Illuminate\Support\Facades\Auth;
 
 class ContactFormController extends Controller
 {
@@ -58,6 +59,21 @@ class ContactFormController extends Controller
         $contact->delete();
 
         return redirect('/admin/contact')->with('status', 'success')->with('message', 'Contact form deleted');
+    }
+
+    /**
+     * Set form as completed
+     * 
+     * @param \App\Models\ContactForm $contact
+     */
+    public function complete(ContactForm $contact)
+    {
+        $contact->update([
+            'status' => 1,
+            'assignee_id' => Auth::user()->id
+        ]);
+
+        return redirect('/admin/contact')->with('status', 'success')->with('message', 'Contact form has been marked as complete');
     }
 
     private function validateInput($input)
