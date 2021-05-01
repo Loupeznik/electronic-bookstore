@@ -21,7 +21,7 @@ class ShippingMethodController extends Controller
 
     public function edit(ShippingMethod $shipping_method)
     {
-        return view('admin.shipping.edit', compact(['method' => $shipping_method]));
+        return view('admin.shipping.edit', compact('shipping_method'));
     }
 
     public function update(Request $request, ShippingMethod $shipping_method)

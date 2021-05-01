@@ -12,7 +12,7 @@
                     <x-section-header>
                         {{ __('Edit shipping method') }}
                     </x-section-header>
-                    <form method="POST" action="/admin/shipping-methods/{{$method->id}}">
+                    <form method="POST" action="/admin/shipping-methods/{{$shipping_method->id}}">
                         @csrf
                         @method('PUT')
                         <div class="flex flex-wrap mb-6">
@@ -20,12 +20,12 @@
                                 <div class="mt-4 w-full">
                                     <x-label for="name" :value="__('Name')" />
                                     <x-input
-                                    id="name" name="name" class="w-full" type="text" value="{{$method->name}}" required />
+                                    id="name" name="name" class="w-full" type="text" value="{{$shipping_method->name}}" required />
                                 </div>
                                 <div class="mt-4 w-full">
                                     <x-label for="cost" :value="__('Cost')" />
                                     <x-input
-                                    id="cost" name="cost" class="w-full" type="text" value="{{$method->cost}}" required />
+                                    id="cost" name="cost" class="w-full" type="text" value="{{$shipping_method->cost}}" required />
                                 </div>
                             </div>
                         </div>
