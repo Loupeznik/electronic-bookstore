@@ -7,7 +7,7 @@
                 src="/storage/{{ $book->photo_path ?? config('filesystems.cover_photo_placeholder_path') }}">
             <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h1 class="text-gray-900 text-3xl title-font font-bold mb-1 uppercase">{{ $book->name }}</h1>
-                <h2 class="text-sm title-font text-gray-500 tracking-widest">by
+                <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ __('by') }}
                     <x-hoverable-link link="{{ '/authors/detail/' . $book->author->id }}">
                         {{ $book->author->name . ' ' . $book->author->surname }}</x-hoverable-link>
                 </h2>
