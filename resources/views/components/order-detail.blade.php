@@ -19,6 +19,10 @@
                             <x-book-detail-field :name="'Shipping method'" :value="$order->shippingMethod->name" />
                             <x-book-detail-field :name="'Shipping cost'" :value="$order->shippingMethod->cost . ' ' . config('app.currency', null)" />
                             <x-book-detail-field :name="'Payment method'" :value="$order->paymentMethod->type" />
+                            @if(Auth::user()->isAdmin())
+                                <x-book-detail-field :name="'Customer'" :value="$order->customer->fullName()" />
+                                <x-book-detail-field :name="'Assignee'" :value="$order->assignee->name ?? '-'" />
+                            @endif
                         </dl>
                     </div>
                 </div>
