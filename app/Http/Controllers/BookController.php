@@ -28,8 +28,8 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        $authors = Author::all();
-        $categories = Category::all();
+        $authors = Author::orderBy('surname')->get();
+        $categories = Category::orderBy('name')->get();
 
         return view('admin.books.edit', compact(['book', 'authors', 'categories']));
     }
@@ -48,8 +48,8 @@ class BookController extends Controller
 
     public function create()
     {
-        $authors = Author::all();
-        $categories = Category::all();
+        $authors = Author::orderBy('surname')->get();
+        $categories = Category::orderBy('name')->get();
 
         return view('admin.books.create', compact(['authors', 'categories']));
     }

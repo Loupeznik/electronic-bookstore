@@ -42,7 +42,7 @@ class CategoryController extends Controller
     {
         Category::create($this->validateInput($request));
 
-        return redirect('/admin/categories')->with('status', 'Success')->with('message', 'Category ' . $request->name . ' has been updated');
+        return redirect('/admin/categories')->with('status', 'Success')->with('message', 'Category ' . $request->name . ' has been created');
     }
 
     public function destroy($id)
