@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class FrontEndController extends Controller
 {

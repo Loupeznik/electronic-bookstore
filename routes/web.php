@@ -56,3 +56,6 @@ Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function(
 // Section main page redirects
 Route::redirect('/admin', '/admin/dashboard');
 Route::redirect('/user', '/user/dashboard');
+
+// Custom Fortify routes
+require __DIR__.'/fortify.php';
